@@ -1,0 +1,25 @@
+{
+  "name": "bower",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.4.1",
+    "angular-new-router": "^0.5.3",
+    "angular-resource": "^1.4.3",
+    "angular-rx": "^0.0.14",
+    "angular-mocks": "^1.4.3",    
+    "bootstrap": "^3.3.5",
+    "jquery": "^2.1.4",
+    "underscore": "^1.8.3"
+  },
+  "exportsOverride": {
+    "bootstrap": {
+      "js": "dist/js/*.*",
+      "css": "dist/css/*.*",
+      "fonts": "dist/fonts/*.*"
+    },
+    "jquery": {
+      "js": "jquery.{js,min.js,min.map}"
+    }
+  }
+}

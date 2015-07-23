@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 22 22" enable-background="new 0 0 22 22" xml:space="preserve">
+<g>
+	<path fill="#353B44" d="M18,22H4c-2.2,0-4-1.8-4-4V4c0-2.2,1.8-4,4-4H18c2.2,0,4,1.8,4,4V18C22,20.2,20.2,22,18,22z"/>
+	<circle fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" cx="11" cy="11.4" r="5"/>
+	<rect x="13.1" y="11" fill="#353B44" width="5.4" height="5.4"/>
+	<rect x="3.3" y="5" fill="#353B44" width="6.4" height="6.4"/>
+	<polyline fill="#FFFFFF" points="11,2.4 7,6.4 11,10.4 	"/>
+	<polyline fill="#FFFFFF" points="12.1,20.4 16.1,16.4 12.1,12.4 	"/>
+</g>
+</svg>

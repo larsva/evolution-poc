@@ -1,0 +1,91 @@
+﻿<div id="page-content">
+     
+    <div class="table">
+        <div class="tablerowgroup">
+            <div class="tablerow">
+                <div class="tablecell cellmain content-label">
+                    <img src="images/icon-history-grey.svg" class="content-label-with-icon" />Senaste ärenden
+                </div>
+             </div>
+            <div class="tablerow listheader">
+                <div class="tablecell cellmain sortedby">
+                    Namn <img src="images/icon-arrow-black.svg" width="10" alt="Sorterad på" />
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    Ärendenr
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    Kontaktnamn
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    Upplagt
+                </div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+
+
+        
+        <div class="tablerowgroup" data-ng-repeat='case in home.latestCases '>
+            <div class="tablerow">
+                <div class="tablecell cellmain cfslarge">
+                    <img src="images/icon-case-black.svg" class="icon-folder" alt="Mapp" />{{case.name}}
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    {{case.id}}
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    {{case.contact}}
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    {{case.created}}
+                </div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+    </div><!-- table -->
+    <p/>
+    <div class="table">
+        <div class="tablerowgroup">
+            <div class="tablerow">
+                <div class="tablecell cellmain content-label">
+                    <img src="images/icon-history-grey.svg" class="content-label-with-icon" />Senaste dokument
+                </div>
+            </div>
+            <div class="tablerow listheader">
+                <div class="tablecell cellmain sortedby">
+                    Namn <img src="images/icon-arrow-black.svg" width="10" alt="Sorterad på" />
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    DokumentID
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    Kontaktnamn
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    Skapad
+                </div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+
+
+
+        <div class="tablerowgroup" data-ng-repeat='doc in home.latestDocuments'>
+            <div class="tablerow">
+                <div class="tablecell cellmain cfslarge">
+                    <img src="images/icon-document-text.svg" class="icon-folder" alt="Mapp" />{{doc.name}}
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    {{doc.id}}
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    {{doc.contact}}
+                </div><!-- tablecell -->
+                <div class="tablecell">
+                    {{doc.date}}
+                </div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+
+
+    </div><!-- table -->
+
+</div><!-- end #page-content -->

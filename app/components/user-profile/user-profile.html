@@ -1,0 +1,76 @@
+﻿<div id="page-content">
+
+    <div class="table border">
+        <div class="tablerowgroup">
+            <div class="tablerow listheader">
+                <div class="tablecell cellmain content-label noborder">Personliga uppgifter</div>
+                <div class="tablecell noborder"></div><!-- tablecell -->
+                <div class="tablecell noborder" ng-hide="userProfile.editPersonalInfo"><a href="#" ng-click="userProfile.startEditPersonalInfo(); $event.preventDefault()">Redigera</a></div><!-- tablecell -->
+                <div class="tablecell noborder" ng-show="userProfile.editPersonalInfo"><a href="#" ng-click="userProfile.savePersonalInfo(); $event.preventDefault()" class="marginright">Spara</a><a href="#" ng-click="userProfile.cancelEditPersonalInfo(); $event.preventDefault()">Avbryt</a></div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+
+        <div class="tablerowgroup">
+            <div class="tablerow">
+                 <div class="tablecell cellmain noborder">
+                    Användarnamn:
+                </div><!-- tablecell -->
+                    <span ng-hide="userProfile.editPersonalInfo">{{userProfile.data.userId}}</span>
+                    <input type="text" ng-model="userProfile.data.userId" ng-show="userProfile.editPersonalInfo" />
+                <div class="tablecell noborder"></div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+
+        <div class="tablerowgroup">
+            <div class="tablerow">
+                <div class="tablecell cellmain noborder"> 
+                    Förnamn:
+                </div><!-- tablecell -->
+                <div class="tablecell noborder user-profile-data">
+                    <span ng-hide="userProfile.editPersonalInfo">{{userProfile.data.firstName}}</span>
+                    <input type="text" ng-model="userProfile.data.firstName" ng-show="userProfile.editPersonalInfo"/>
+                </div><!-- tablecell -->
+                <div class="tablecell noborder"></div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+
+        <div class="tablerowgroup">
+            <div class="tablerow">
+                <div class="tablecell cellmain noborder">
+                    Efternamn:
+                </div><!-- tablecell -->
+                <div class="tablecell noborder user-profile-data">
+                    <span ng-hide="userProfile.editPersonalInfo">{{userProfile.data.lastName}}</span>
+                    <input type="text" ng-model="userProfile.data.lastName" ng-show="userProfile.editPersonalInfo" />
+               </div><!-- tablecell -->
+                <div class="tablecell noborder"></div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+
+        <div class="tablerowgroup">
+            <div class="tablerow">
+                <div class="tablecell cellmain noborder">
+                    Titel:
+                </div><!-- tablecell -->
+                <div class="tablecell noborder user-profile-data">
+                    <span ng-hide="userProfile.editPersonalInfo">{{userProfile.data.title}}</span>
+                    <input type="text" ng-model="userProfile.data.title" ng-show="userProfile.editPersonalInfo" />
+              </div><!-- tablecell -->
+                <div class="tablecell noborder"></div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+
+        <div class="tablerowgroup">
+            <div class="tablerow">
+                <div class="tablecell cellmain noborder">
+                    Adress:
+                </div><!-- tablecell -->
+                <div class="tablecell noborder user-profile-data">
+                    <span ng-hide="userProfile.editPersonalInfo">{{userProfile.data.address}}</span>
+                    <input type="text" ng-model="userProfile.data.address" ng-show="userProfile.editPersonalInfo" />
+                </div><!-- tablecell -->
+                <div class="tablecell noborder"></div><!-- tablecell -->
+            </div><!-- tablerow -->
+        </div><!-- tablerowgroup -->
+      </div>
+</div>

@@ -1,0 +1,17 @@
+﻿{
+  "userId": "urtu",
+  "firstName": "Urban",
+  "lastName": "Turban",
+  "unit": { "name": "Skolkontoret" },
+  "units": [ { "name": "Skolkontoret" }, { "name": "Kommunstyrelsen" }, { "name": "Socialförvaltningen" } ],
+  "title": "Assistent",
+  "address": "Storgatan 1",
+  "c/o": "Sewer",
+  "zip": "11434",
+  "city": "Stockholm",
+  "e-mail": "urban.turban@sewer.se",
+  "mobile-phone": "0730112233",
+  "work-phone": "08-112233",
+  "messages-by-email": "true",
+  "subscribe-on-my-cases":  "true" 
+}
