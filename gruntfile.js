@@ -30,10 +30,12 @@ module.exports = function (grunt) {
                     'angular': 'angular',
                     'angular-new-router': 'angular-new-router/dist',
                     'angular-resource': 'angular-resource',
+                    'angular-strap': 'angular-strap/dist',
                     'angular-rx': 'angular-rx/dist',
                     'jquery': 'jquery/dist',
                     'underscore': 'underscore',
-                    'bootstrap': 'bootstrap/dist/css'
+                    'bootstrap': 'bootstrap/dist/css',
+                    'bootstrap-additions': 'bootstrap-additions/dist'
                 }
             }
         },

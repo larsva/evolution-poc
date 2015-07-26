@@ -3,7 +3,7 @@
 
     angular.module('app',
         [
-            'ngNewRouter', 'ngResource', 'app.header', 'app.navigation', 'app.home.header', 'app.home', 'app.user.profile.header', 'app.user.profile'
+            'ngNewRouter', 'ngResource', 'mgcrea.ngStrap','app.header', 'app.navigation', 'app.home.header', 'app.home', 'app.user.profile.header', 'app.user.profile'
         ]);
 })();
 
@@ -116,22 +116,25 @@
 
         $router.config([
             {path: '/', redirectTo:'/home'},
-            { path: '/home', components:{
-                'header': 'header',
-                'sidebar': 'navigation',
-                'content-header': 'homeHeader',
-                'content': 'home'
+            {
+                path: '/home',
+                components: {
+                    'header': 'header',
+                    'sidebar': 'navigation',
+                    'content-header': 'homeHeader',
+                    'content': 'home'
                 }
             },
             {
-                path: '/userProfile', components: {
+                path: '/userProfile',
+                components: {
                     'header': 'header',
                     'sidebar': 'navigation',
                     'content-header': 'userProfileHeader',
                     'content': 'userProfile'
                 }
             }]);
-        
+
         self.currentUser = Auth.getCurrentUser();
         console.log('AppController.currentUser:' + self.currentUser);
     }
@@ -139,9 +142,15 @@
 })();
 
 (function () {
-    angular.module('app.header', [])
+    angular.module('app.header', ['mgcrea.ngStrap'])
     .controller('HeaderController', [
-        function () { }]); 
+        function () {
+            var self= this;
+
+            self.profilePopover = {
+                templateUrl: 'components/header/profile-popover.html'
+             }
+        }]);
 })();
 (function() {
     angular.module('app.home.header', [])

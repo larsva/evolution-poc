@@ -24,16 +24,16 @@ footer, header, hgroup, menu, nav, section { display: block; }
 /* Css */
 @font-face {
   font-family: 'Lato';
-  src: url('fonts/Lato-Black.ttf')  format('truetype'),
-       url('fonts/Lato-BlackItalic.ttf')  format('truetype'),
-       url('fonts/Lato-Bold.ttf')  format('truetype'),
-       url('fonts/Lato-BoldItalic.ttf')  format('truetype')
-       url('fonts/Lato-Hairline.ttf')  format('truetype'),
-       url('fonts/Lato-HairlineItalic.ttf')  format('truetype'),
-       url('fonts/Lato-Italic.ttf')  format('truetype'),
-       url('fonts/Lato-Light.ttf')  format('truetype'),
-       url('fonts/Lato-LightItalic.ttf')  format('truetype'),
-       url('fonts/Lato-Regular.ttf')  format('truetype'); 
+  src: url('../fonts/Lato-Black.ttf')  format('truetype'),
+       url('../fonts/Lato-BlackItalic.ttf')  format('truetype'),
+       url('../fonts/Lato-Bold.ttf')  format('truetype'),
+       url('../fonts/Lato-BoldItalic.ttf')  format('truetype'),
+       url('../fonts/Lato-Hairline.ttf')  format('truetype'),
+       url('../fonts/Lato-HairlineItalic.ttf')  format('truetype'),
+       url('../fonts/Lato-Italic.ttf')  format('truetype'),
+       url('../fonts/Lato-Light.ttf')  format('truetype'),
+       url('../fonts/Lato-LightItalic.ttf')  format('truetype'),
+       url('../fonts/Lato-Regular.ttf')  format('truetype');
 }
 .clear-fix:after { clear: both; content: ""; display: block; height: 0; visibility: hidden; }
 
@@ -44,7 +44,7 @@ footer, header, hgroup, menu, nav, section { display: block; }
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
     margin:0; 
-    padding:0;s
+    padding:0;
 }
 
 .nopadding {
@@ -66,7 +66,7 @@ html, body {
 body {
 	background: #fff;
     color: #333;
-    font:400 16px/1.525em 'Lato', arial, sans-serif;
+    font:400 16px/1.525em 'Lato-Light', arial, sans-serif;
 }
 
 p {
@@ -257,7 +257,7 @@ img {
 }
 
 .navigation ul ul li {
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 .navigation a {
     color:rgba(255, 255, 255, 0.90);
@@ -436,3 +436,5 @@ img {
 .border {
     border: 1px solid #eee;
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

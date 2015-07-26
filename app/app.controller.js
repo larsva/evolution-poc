@@ -11,15 +11,18 @@
 
         $router.config([
             {path: '/', redirectTo:'/home'},
-            { path: '/home', components:{
-                'header': 'header',
-                'sidebar': 'navigation',
-                'content-header': 'homeHeader',
-                'content': 'home'
+            {
+                path: '/home',
+                components: {
+                    'header': 'header',
+                    'sidebar': 'navigation',
+                    'content-header': 'homeHeader',
+                    'content': 'home'
                 }
             },
             {
-                path: '/userProfile', components: {
+                path: '/userProfile',
+                components: {
                     'header': 'header',
                     'sidebar': 'navigation',
                     'content-header': 'userProfileHeader',

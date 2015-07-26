@@ -15,6 +15,7 @@ module.exports = function (config) {
             'bower_components/angular/angular.js',
             'bower_components/angular-new-router/dist/router.es5.js',
             'bower_components/angular-resource/angular-resource.js',
+            'bower_components/angular-strap/dist/angular-strap.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'app/**/*.module.js', 'app/**/*.services.js', 'app/**/*.controller.js', 'app/**/*.js',
             'test/unit/**/*.js'
