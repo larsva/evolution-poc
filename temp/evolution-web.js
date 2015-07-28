@@ -3,7 +3,7 @@
 
     angular.module('app',
         [
-            'ngNewRouter', 'ngResource', 'mgcrea.ngStrap','app.header', 'app.navigation', 'app.home.header', 'app.home', 'app.user.profile.header', 'app.user.profile'
+            'ngNewRouter', 'ngResource', 'mgcrea.ngStrap','app.header', 'app.navigation', 'app.home.header', 'app.home', 'app.user.profile.header', 'app.user.profile','app.settings'
         ]);
 })();
 
@@ -142,12 +142,7 @@
         self.currentUser = Auth.getCurrentUser();
         console.log('AppController.currentUser:' + self.currentUser);
 
-        function SettingsController() {
-            this.title = "Settings";
-            this.content ="Content";
-        }
-
-        self.settingsModal = $modal({controller: SettingsController,controllerAs: 'settings', templateUrl: 'settings.tpl.html', show: false});
+        self.settingsModal = $modal({controller: "SettingsController",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
         self.showSettingsModal = function() {
             self.settingsModal.$promise.then(self.settingsModal.show);
         };
@@ -249,6 +244,18 @@
 
 })();
 
+(function() {
+    angular.module('app.settings', [])
+        .controller('SettingsController', [SettingsController]);
+
+    function SettingsController() {
+        var self = this;
+
+        self.title = 'Settings';
+
+    };
+
+})();
 (function() {
     angular.module('app.user.profile.header', [])
     .controller('UserProfileHeaderController', ['Auth', UserProfileHeaderController]);
