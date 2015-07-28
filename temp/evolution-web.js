@@ -108,11 +108,15 @@
 
     angular
         .module('app')
-        .controller('App', ['$router','Auth',AppController]);
+        .config(function($modalProvider) {
+            angular.extend($modalProvider.defaults, {
+                html: true
+            });
+        })
+        .controller('App', ['$modal','$router','Auth',AppController]);
 
-    function AppController($router, Auth) {
-        var self = this,
-            currentUser; 
+    function AppController($modal,$router, Auth) {
+        var self = this;
 
         $router.config([
             {path: '/', redirectTo:'/home'},
@@ -137,6 +141,20 @@
 
         self.currentUser = Auth.getCurrentUser();
         console.log('AppController.currentUser:' + self.currentUser);
+
+        function SettingsController() {
+            this.title = "Settings";
+            this.content ="Content";
+        }
+
+        self.settingsModal = $modal({controller: SettingsController,controllerAs: 'settings', templateUrl: 'settings.tpl.html', show: false});
+        self.showSettingsModal = function() {
+            self.settingsModal.$promise.then(self.settingsModal.show);
+        };
+        self.hideSettingsModal = function() {
+            self.settingsModal.$promise.then(self.settingsModal.hide);
+        };
+
     }
 
 })();
