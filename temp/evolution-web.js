@@ -90,15 +90,19 @@
     function UserServices($resource) {
         /* jshint validthis:true */
         var service = {
-            getProfile: getProfile,
-            };
+                getProfile: getProfile,
+                getSettings: getSettings,
+        };
+
         return service;
 
         function getProfile(user,success) {
             return $resource('data/'+user.userId + '.json', {}).get(success);
         }
 
-
+        function getSettings(user,success) {
+            return $resource('data/'+user.userId + '-settings.json', {}).get(success);
+        }
     }
 
 })();
@@ -142,7 +146,7 @@
         self.currentUser = Auth.getCurrentUser();
         console.log('AppController.currentUser:' + self.currentUser);
 
-        self.settingsModal = $modal({controller: "SettingsController",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
+        self.settingsModal = $modal({controller: "Settings",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
         self.showSettingsModal = function() {
             self.settingsModal.$promise.then(self.settingsModal.show);
         };
@@ -246,12 +250,16 @@
 
 (function() {
     angular.module('app.settings', [])
-        .controller('SettingsController', [SettingsController]);
+        .controller('Settings', ['Auth','User',SettingsController]);
 
-    function SettingsController() {
+    function SettingsController(Auth,User) {
         var self = this;
 
         self.title = 'Settings';
+
+        var temp = User.getSettings(Auth.getCurrentUser(), function() {
+            self.settingsModel = temp;
+        });
 
     };
 

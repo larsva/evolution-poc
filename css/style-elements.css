@@ -250,6 +250,37 @@ article {
     padding-bottom: 10px;
 }
 
+/* Vertical tabs */
+
+.tabs-nav-vertical {
+    list-style: none;
+}
+
+.tabs-nav-vertical li {
+   margin: 4px 5px 0 0;
+}
+
+.tabs-nav-vertical .active a {
+    display: block;
+    text-align: center;
+    color: #353b44;
+    border-bottom: 5px solid #aacd4d;
+    width: 150px;
+    line-height: 1rem;
+    padding-bottom: 7px;
+
+
+}
+
+.tabs-nav-vertical a {
+    display: block;
+    text-align: center;
+    color: #353b44;
+    border-bottom: 2px solid #ccc;
+    width: 150px;
+    line-height: 1rem;
+    padding-bottom: 10px;
+}
 
 /* Meta box */
 .errand-meta {

@@ -37,7 +37,7 @@
         self.currentUser = Auth.getCurrentUser();
         console.log('AppController.currentUser:' + self.currentUser);
 
-        self.settingsModal = $modal({controller: "SettingsController",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
+        self.settingsModal = $modal({controller: "Settings",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
         self.showSettingsModal = function() {
             self.settingsModal.$promise.then(self.settingsModal.show);
         };

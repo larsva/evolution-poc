@@ -12,6 +12,6 @@
   "e-mail": "urban.turban@sewer.se",
   "mobile-phone": "0730112233",
   "work-phone": "08-112233",
-  "messages-by-email": "true",
-  "subscribe-on-my-cases":  "true" 
+  "messages-by-email": true,
+  "subscribe-on-my-cases":  true
 }
