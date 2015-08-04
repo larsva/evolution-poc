@@ -21,8 +21,8 @@
         self.service = {
             loginResult: loginResult,
             canActivate: canActivate,
-            activate: activate,
-         };
+            activate: activate
+          };
 
         self.loginModal = $modal({controller: "Login",controllerAs: 'login', templateUrl: 'components/login/login.tpl.html',
                                   show: false, backdrop:"static", animation:"am-fade-and-slide-top",placement:"center"});
@@ -38,19 +38,23 @@
             self.loginModal.$promise.then(function () {
                 self.loginModal.show().then(function(res) {
                     console.log('Logged in: ' + res);
-                    if (res) {
+                    if (res == 'authenticated') {
                         modalDeferred.resolve();
+                        self.loginModal.hide();
                     } else {
                         modalDeferred.reject();
                     }
-                 })});
+                 },
+                function(res) {
+                    console.log('Rejected: ' + res);
+                })});
         };
+
 
         return self.service;
 
-
         function canActivate() {
-            console.log('Can activate route change to: ' + $location.path() + '?')
+            console.log('Can activate route change to: ' + $location.path() + '?');
             var authenticated = Auth.isAuthenticated();
             if (!authenticated) {
                 var modalDeferred = $q.defer();
@@ -63,7 +67,6 @@
         function loginResult(res) {
             console.log('Login result: ' + res);
             self.deferred.resolve(res);
-            self.loginModal.hide();
         };
 
         function activate() {
@@ -270,31 +273,28 @@
 })();
 (function() {
     angular.module('app.home.header', [])
-    .controller('HomeHeaderController', ['Auth','ChangeUnit', 'AuthMixin',HomeHeaderController]);
+    .controller('HomeHeaderController', ['Auth','ChangeUnit', HomeHeaderController]);
 
-    function HomeHeaderController(Auth,ChangeUnit,AuthMixin) {
-        var self = this,
-            changedUnit,
-            changeUnitMode = false; 
+    function HomeHeaderController(Auth,ChangeUnit) {
+        var self = this;
 
         self.startChangeUnit = function() {
             self.changedUnit = ChangeUnit.startChangeUnit(Auth.getCurrentUser());
             self.changeUnitMode = true;
-        }
+        };
 
         self.saveUnit = function () {
             ChangeUnit.saveUnit(Auth.getCurrentUser(), self.changedUnit);
             self.changeUnitMode = false;
-        }
+        };
 
         self.cancelChangeUnit = function () {
             ChangeUnit.cancelChangeUnit();
             self.changeUnitMode = false;
-        }
+        };
 
- //       angular.extend(self, AuthMixin.activate);
 
-    };
+    }
 })();
 (function() {
     angular.module('app.home', [])
@@ -325,23 +325,28 @@
         /* jshint validthis:true */
         var self = this;
 
+        self.errorMessage = '';
         self.credentials = {
             userId: '',
             password: ''
         };
 
         self.handleLogin = function() {
-            AuthMixin.loginResult(Auth.isAuthenticated());
-        }
+            var isAuthenticated = Auth.isAuthenticated();
+            if (!isAuthenticated) {
+                self.errorMessage = 'Ogiltigt användarnamn och/eller lösenord';
+            }
+            AuthMixin.loginResult(isAuthenticated ? 'authenticated' : 'not_authenticated');
+        };
 
         self.cancelLogin = function() {
-            AuthMixin.loginResult(false);
-        }
+            AuthMixin.loginResult('cancel');
+        };
 
         self.login = function (credentials) {
-            Auth.login(credentials, self.handleLogin, self.cancelLogin);
+            Auth.login(credentials, self.handleLogin, self.handleLogin);
 
-        }
+        };
 
         self.cancel = function () {
             self.cancelLogin();

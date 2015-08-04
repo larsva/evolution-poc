@@ -777,6 +777,11 @@ input[type=reset]:hover {
     margin-bottom: 6px;
 }
 
+.login-error {
+    width: 100%;
+    color:red;
+}
+
 
 
 

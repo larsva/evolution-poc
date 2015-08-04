@@ -12,8 +12,8 @@
         self.service = {
             loginResult: loginResult,
             canActivate: canActivate,
-            activate: activate,
-         };
+            activate: activate
+          };
 
         self.loginModal = $modal({controller: "Login",controllerAs: 'login', templateUrl: 'components/login/login.tpl.html',
                                   show: false, backdrop:"static", animation:"am-fade-and-slide-top",placement:"center"});
@@ -29,19 +29,23 @@
             self.loginModal.$promise.then(function () {
                 self.loginModal.show().then(function(res) {
                     console.log('Logged in: ' + res);
-                    if (res) {
+                    if (res == 'authenticated') {
                         modalDeferred.resolve();
+                        self.loginModal.hide();
                     } else {
                         modalDeferred.reject();
                     }
-                 })});
+                 },
+                function(res) {
+                    console.log('Rejected: ' + res);
+                })});
         };
+
 
         return self.service;
 
-
         function canActivate() {
-            console.log('Can activate route change to: ' + $location.path() + '?')
+            console.log('Can activate route change to: ' + $location.path() + '?');
             var authenticated = Auth.isAuthenticated();
             if (!authenticated) {
                 var modalDeferred = $q.defer();
@@ -54,7 +58,6 @@
         function loginResult(res) {
             console.log('Login result: ' + res);
             self.deferred.resolve(res);
-            self.loginModal.hide();
         };
 
         function activate() {

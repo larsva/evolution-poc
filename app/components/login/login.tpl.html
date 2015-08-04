@@ -12,14 +12,17 @@
                 <div><input type="text" ng-model="login.credentials.password" placeholder="Lösenord"
                             class="login-element"/></div>
                 <button type="button" class="btn btn-primary login-element"
-                        ng-click="$hide();login.login(login.credentials)">Logga in
+                        ng-click="login.login(login.credentials)">Logga in
                 </button>
-                <button type="button" class="btn login-element" ng-click="$hide();login.cancel()">Avbryt</button>
+                <button type="button" class="btn login-element" ng-click="login.cancel()">Avbryt</button>
 
              </div>
             <div class="modal-body clear-fix">
                 <div class="login-link"><a href="#">Problem att logga in?</a></div>
                 <div class="login-link"><a href="#">Kontakta Essvision</a></div>
+            </div>
+            <div class="modal-body clear-fix">
+                <span class="login-error">{{login.errorMessage}}</span>
             </div>
         </div>
     </div>
