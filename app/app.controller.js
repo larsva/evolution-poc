@@ -19,8 +19,7 @@
                 path: '/home',
                 components: {
                     'header': 'header',
-                    'sidebar': 'navigation',
-                    'content-header': 'homeHeader',
+                    'navigation': 'navigation',
                     'content': 'home'
                 }
             },
@@ -28,8 +27,7 @@
                 path: '/userProfile',
                 components: {
                     'header': 'header',
-                    'sidebar': 'navigation',
-                    'content-header': 'userProfileHeader',
+                    'navigation': 'navigation',
                     'content': 'userProfile'
                 }
             }]);

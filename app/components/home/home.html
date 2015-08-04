@@ -1,4 +1,19 @@
-﻿<div id="page-content">
+﻿<div class="list-meta-bar clear-fix">
+    <div class="alignleft">
+        <img src="images/nathan-fillion.jpg" width="72" height="72"/>
+    </div>
+    <div class="alignleft">
+        <div class="home-content-header strong">Välkommen {{app.currentUser.firstName}}!</div>
+        <div class="cfslarge" ng-hide="home.changeUnitMode">Du är inloggad på {{app.currentUser.unit.name}}. <a href="#" ng-click="home.startChangeUnit()">Byt enhet</a></div>
+        <div class="cfslarge" ng-show="home.changeUnitMode">
+            Du är inloggad på
+            <select data-ng-model="home.changedUnit" data-ng-options="unit as unit.name for unit in app.currentUser.units track by unit.name"></select>
+            <a href="#" ng-click="home.saveUnit()" class="marginright">Spara</a><a href="#" ng-click="home.cancelChangeUnit()">Avbryt</a>
+        </div>
+        <div class="cfslarge" ng-hide="home.changeUnitMode"><a href="/userProfile" >Redigera min profil</a></div>
+    </div>
+</div><!-- end list-meta-bar -->
+<div id="page-content">
      
     <div class="table">
         <div class="tablerowgroup">

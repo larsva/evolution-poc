@@ -1,0 +1,9 @@
+<div class="popover" tabindex="-1" style="width:300px">
+    <div class="alignleft">
+        <img src="images/nathan-fillion.jpg" width="72" height="72"/>
+    </div>
+    <div class="alignleft">
+        <div class="home-content-header strong">{{app.currentUser.name()}}</div>
+        <div class="cfslarge" ><a href="#" ng-click="$hide();app.showSettingsModal()">Inställningar</a></div>
+        <div class="cfslarge"><a href="#" ng-click="$hide();app.logout();$event.preventDefault()">Loggga ut</a></div>
+</div>
