@@ -765,8 +765,8 @@ input[type=reset]:hover {
 }
 
 /* Login dialog */
-.login-modal-dialog {
-    width: 300px;
+.modal-dialog.login-modal-dialog {
+    width: 320px !important;
 }
 .login-element {
     width: 100%;

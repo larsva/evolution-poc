@@ -21,9 +21,11 @@
         self.service = {
             loginResult: loginResult,
             canActivate: canActivate,
+            activate: activate,
          };
 
-        self.loginModal = $modal({controller: "Login",controllerAs: 'login', templateUrl: 'components/login/login.tpl.html', show: false, backdrop:"static", animation:"am-fade-and-slide-top"});
+        self.loginModal = $modal({controller: "Login",controllerAs: 'login', templateUrl: 'components/login/login.tpl.html',
+                                  show: false, backdrop:"static", animation:"am-fade-and-slide-top",placement:"center"});
 
         var parentShow = self.loginModal.show;
         self.loginModal.show = function() {
@@ -64,7 +66,9 @@
             self.loginModal.hide();
         };
 
-
+        function activate() {
+            console.log("Activate " + $location.path());
+        }
     }
 })();
 
@@ -255,7 +259,7 @@
 (function () {
     angular.module('app.header', ['mgcrea.ngStrap'])
         .controller('HeaderController', [HeaderController]);
-    function HeaderController(Base) {
+    function HeaderController(Base,AuthMixin) {
         var self = this;
 
         self.profilePopover = {
@@ -266,9 +270,9 @@
 })();
 (function() {
     angular.module('app.home.header', [])
-    .controller('HomeHeaderController', ['Auth','ChangeUnit', 'Base',HomeHeaderController]);
+    .controller('HomeHeaderController', ['Auth','ChangeUnit', 'AuthMixin',HomeHeaderController]);
 
-    function HomeHeaderController(Auth,ChangeUnit,Base) {
+    function HomeHeaderController(Auth,ChangeUnit,AuthMixin) {
         var self = this,
             changedUnit,
             changeUnitMode = false; 
@@ -288,7 +292,7 @@
             self.changeUnitMode = false;
         }
 
- //       angular.extend(self, Base);
+ //       angular.extend(self, AuthMixin.activate);
 
     };
 })();

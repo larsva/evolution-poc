@@ -12,9 +12,11 @@
         self.service = {
             loginResult: loginResult,
             canActivate: canActivate,
+            activate: activate,
          };
 
-        self.loginModal = $modal({controller: "Login",controllerAs: 'login', templateUrl: 'components/login/login.tpl.html', show: false, backdrop:"static", animation:"am-fade-and-slide-top"});
+        self.loginModal = $modal({controller: "Login",controllerAs: 'login', templateUrl: 'components/login/login.tpl.html',
+                                  show: false, backdrop:"static", animation:"am-fade-and-slide-top",placement:"center"});
 
         var parentShow = self.loginModal.show;
         self.loginModal.show = function() {
@@ -55,6 +57,8 @@
             self.loginModal.hide();
         };
 
-
+        function activate() {
+            console.log("Activate " + $location.path());
+        }
     }
 })();

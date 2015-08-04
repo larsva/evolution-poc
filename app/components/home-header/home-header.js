@@ -1,8 +1,8 @@
 ﻿(function() {
     angular.module('app.home.header', [])
-    .controller('HomeHeaderController', ['Auth','ChangeUnit', 'Base',HomeHeaderController]);
+    .controller('HomeHeaderController', ['Auth','ChangeUnit', 'AuthMixin',HomeHeaderController]);
 
-    function HomeHeaderController(Auth,ChangeUnit,Base) {
+    function HomeHeaderController(Auth,ChangeUnit,AuthMixin) {
         var self = this,
             changedUnit,
             changeUnitMode = false; 
@@ -22,7 +22,7 @@
             self.changeUnitMode = false;
         }
 
- //       angular.extend(self, Base);
+ //       angular.extend(self, AuthMixin.activate);
 
     };
 })();

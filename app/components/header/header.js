@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module('app.header', ['mgcrea.ngStrap'])
         .controller('HeaderController', [HeaderController]);
-    function HeaderController(Base) {
+    function HeaderController(Base,AuthMixin) {
         var self = this;
 
         self.profilePopover = {
