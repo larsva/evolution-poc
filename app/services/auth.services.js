@@ -3,40 +3,69 @@
 
     angular
         .module('app')
-        .factory('Auth', [AuthServices]);
+        .factory('Auth', ['User', AuthServices]);
 
-    function AuthServices() {
+    function AuthServices(User) {
+        var self = this;
 
-        var self = this,
-            service = {
-                getCurrentUser: getCurrentUser,
-                setCurrentUser: setCurrentUser
-            };
 
-        self.currentUser = {
-            userId: 'urtu',
-            firstName: 'Urban',
-            lastName: 'Turban',
-            unit: { name: 'Skolkontoret' },
-            units: [{ name: 'Skolkontoret' }, { name: 'Kommunstyrelsen' }, { name: 'Socialförvaltningen' }],
-
-            name: function () {
-                return this.firstName + ' ' + this.lastName;
-            },
-
-            setUnit: function(newUnit) {
-                this.unit = newUnit;
-            }
+        self.currentUserSubject = new Rx.ReplaySubject();
+        self.service = {
+            login: login,
+            logout: logout,
+            isAuthenticated: isAuthenticated,
+            isAuthorized: isAuthorized,
+            getCurrentUser: getCurrentUser,
+            setCurrentUser: setCurrentUser,
+            subscribe: subscribe
         };
 
-        return service;
 
-        function getCurrentUser() { 
+        return self.service;
+
+        function login(credentials,success,failure) {
+            var userProfile = User.getUser(credentials.userId, function () {
+                self.service.setCurrentUser(userProfile);
+                success();
+             }, function () {
+                self.currentUser = null;
+                failure();
+            });
+        }
+
+        function logout(userId) {
+            self.currentUser = null;
+        }
+
+        function getCurrentUser() {
             return self.currentUser;
         }
 
+        function isAuthenticated() {
+            return self.currentUser != null;
+        }
+
+        function isAuthorized(roles) {
+            return self.isAuthenticated();
+        }
+
         function setCurrentUser(user) {
+            console.log('Auth - new current user: ' + user.userId);
             self.currentUser = user;
+            angular.extend(self.currentUser, {
+                name: function () {
+                    return this.firstName + ' ' + this.lastName;
+                },
+
+                setUnit: function (newUnit) {
+                    this.unit = newUnit;
+                }
+            })
+            self.currentUserSubject.onNext(self.currentUser);
+        }
+
+        function subscribe(subscription) {
+            self.currentUserSubject.subscribe(subscription);
         }
     }
 

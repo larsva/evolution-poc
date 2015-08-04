@@ -1,0 +1,26 @@
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog login-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clear-fix">
+                <div>
+                    <h4 class="modal-title">Logga in</h4>
+                </div>
+            </div>
+            <div class="modal-body clear-fix">
+                <div><input type="text" ng-model="login.credentials.userId" placeholder="Användarnamn"
+                            class="login-element"/></div>
+                <div><input type="text" ng-model="login.credentials.password" placeholder="Lösenord"
+                            class="login-element"/></div>
+                <button type="button" class="btn btn-primary login-element"
+                        ng-click="$hide();login.login(login.credentials)">Logga in
+                </button>
+                <button type="button" class="btn login-element" ng-click="$hide();login.cancel()">Avbryt</button>
+
+             </div>
+            <div class="modal-body clear-fix">
+                <div class="login-link"><a href="#">Problem att logga in?</a></div>
+                <div class="login-link"><a href="#">Kontakta Essvision</a></div>
+            </div>
+        </div>
+    </div>
+</div>

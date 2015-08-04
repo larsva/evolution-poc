@@ -1,12 +1,12 @@
-﻿
-(function () {
+﻿(function () {
     angular.module('app.header', ['mgcrea.ngStrap'])
-    .controller('HeaderController', [
-        function () {
-            var self= this;
+        .controller('HeaderController', [HeaderController]);
+    function HeaderController(Base) {
+        var self = this;
 
-            self.profilePopover = {
-                templateUrl: 'components/header/profile-popover.html'
-             }
-        }]);
+        self.profilePopover = {
+            templateUrl: 'components/header/profile-popover.html'
+        }
+
+    };
 })();

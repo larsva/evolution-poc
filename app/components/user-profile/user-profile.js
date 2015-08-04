@@ -3,38 +3,55 @@
 
     angular
         .module('app.user.profile', [])
-        .controller('UserProfileController', ['Auth','User',UserProfileController]);
+        .controller('UserProfileController', ['Auth', 'User', 'AuthMixin', UserProfileController]);
 
-    function UserProfileController(Auth,User) { 
-        /* jshint validthis:true */ 
-        var self = this,
-            data = {},
-            backup = {},
-            editPersonalInfo = false;
+    function UserProfileController(Auth, User, AuthMixin) {
+        /* jshint validthis:true */
+        var self = this;
 
-         activate();
+        self.data = {};
+        self.backup = {};
+        self.editPersonalInfo = false;
+        angular.extend(self, AuthMixin);
 
-         function activate() {
-             var user = Auth.getCurrentUser();
-             var profileData = User.getProfile(user, function () {
-                 self.data = profileData;
-             });
-         }
 
-         self.startEditPersonalInfo = function () {
-             self.editPersonalInfo = true;
-             self.backup = _.clone(self.data);
-         }
-         self.savePersonalInfo = function () {
-             self.editPersonalInfo = false;
-             self.backup = null;
-         }
+        self.getUserProfile = function () {
+            var user = Auth.getCurrentUser();
+            if (user) {
+                console.log('UserProfile - current user: ' + user.userId);
+                var profileData = User.getUser(user.userId,
+                            function () {
+                                console.log('Read profile data for ' + profileData.userId);
+                                self.data = profileData;
+                            },
+                            function() {
+                                console.log('Unable to read profile data for ' + user.userId);
+                            });
+                } else {
+                console.log('UserProfile - current user undefined.');
+            }
+        }
 
-         self.cancelEditPersonalInfo = function () {
-              self.data = self.backup;
-             self.backup = null;
-             self.editPersonalInfo = false;
-         }
+
+        self.activate = function() {
+            self.getUserProfile();
+        }
+
+        self.startEditPersonalInfo = function () {
+            self.editPersonalInfo = true;
+            self.backup = _.clone(self.data);
+        }
+        self.savePersonalInfo = function () {
+            self.editPersonalInfo = false;
+            self.backup = null;
+        }
+
+        self.cancelEditPersonalInfo = function () {
+            self.data = self.backup;
+            self.backup = null;
+            self.editPersonalInfo = false;
+        }
+
 
     }
 })();

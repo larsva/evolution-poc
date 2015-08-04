@@ -3,7 +3,7 @@
 
     angular.module('app',
         [
-            'ngNewRouter', 'ngResource', 'mgcrea.ngStrap','app.header', 'app.navigation', 'app.home.header', 'app.home', 'app.user.profile.header', 'app.user.profile','app.settings'
+            'ngNewRouter', 'ngResource', 'ngAnimate','mgcrea.ngStrap','app.user.login', 'app.header', 'app.navigation', 'app.home.header', 'app.home', 'app.user.profile.header', 'app.user.profile','app.settings'
         ]);
 })();
 
@@ -12,40 +12,130 @@
 
     angular
         .module('app')
-        .factory('Auth', [AuthServices]);
+        .service('AuthMixin', ['$q','$location','$modal','Auth',AuthMixinServices]);
 
-    function AuthServices() {
+    function AuthMixinServices($q,$location,$modal,Auth) {
+        /* jshint validthis:true */
+        var self = this;
 
-        var self = this,
-            service = {
-                getCurrentUser: getCurrentUser,
-                setCurrentUser: setCurrentUser
-            };
+        self.service = {
+            loginResult: loginResult,
+            canActivate: canActivate,
+         };
 
-        self.currentUser = {
-            userId: 'urtu',
-            firstName: 'Urban',
-            lastName: 'Turban',
-            unit: { name: 'Skolkontoret' },
-            units: [{ name: 'Skolkontoret' }, { name: 'Kommunstyrelsen' }, { name: 'Socialförvaltningen' }],
+        self.loginModal = $modal({controller: "Login",controllerAs: 'login', templateUrl: 'components/login/login.tpl.html', show: false, backdrop:"static", animation:"am-fade-and-slide-top"});
 
-            name: function () {
-                return this.firstName + ' ' + this.lastName;
-            },
-
-            setUnit: function(newUnit) {
-                this.unit = newUnit;
-            }
+        var parentShow = self.loginModal.show;
+        self.loginModal.show = function() {
+            self.deferred = $q.defer();
+            parentShow();
+            return self.deferred.promise;
         };
 
-        return service;
+        self.showLoginModal = function (modalDeferred) {
+            self.loginModal.$promise.then(function () {
+                self.loginModal.show().then(function(res) {
+                    console.log('Logged in: ' + res);
+                    if (res) {
+                        modalDeferred.resolve();
+                    } else {
+                        modalDeferred.reject();
+                    }
+                 })});
+        };
 
-        function getCurrentUser() { 
+        return self.service;
+
+
+        function canActivate() {
+            console.log('Can activate route change to: ' + $location.path() + '?')
+            var authenticated = Auth.isAuthenticated();
+            if (!authenticated) {
+                var modalDeferred = $q.defer();
+                self.showLoginModal(modalDeferred);
+                return modalDeferred.promise;
+            }
+            return true;
+        };
+
+        function loginResult(res) {
+            console.log('Login result: ' + res);
+            self.deferred.resolve(res);
+            self.loginModal.hide();
+        };
+
+
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .factory('Auth', ['User', AuthServices]);
+
+    function AuthServices(User) {
+        var self = this;
+
+
+        self.currentUserSubject = new Rx.ReplaySubject();
+        self.service = {
+            login: login,
+            logout: logout,
+            isAuthenticated: isAuthenticated,
+            isAuthorized: isAuthorized,
+            getCurrentUser: getCurrentUser,
+            setCurrentUser: setCurrentUser,
+            subscribe: subscribe
+        };
+
+
+        return self.service;
+
+        function login(credentials,success,failure) {
+            var userProfile = User.getUser(credentials.userId, function () {
+                self.service.setCurrentUser(userProfile);
+                success();
+             }, function () {
+                self.currentUser = null;
+                failure();
+            });
+        }
+
+        function logout(userId) {
+            self.currentUser = null;
+        }
+
+        function getCurrentUser() {
             return self.currentUser;
         }
 
+        function isAuthenticated() {
+            return self.currentUser != null;
+        }
+
+        function isAuthorized(roles) {
+            return self.isAuthenticated();
+        }
+
         function setCurrentUser(user) {
+            console.log('Auth - new current user: ' + user.userId);
             self.currentUser = user;
+            angular.extend(self.currentUser, {
+                name: function () {
+                    return this.firstName + ' ' + this.lastName;
+                },
+
+                setUnit: function (newUnit) {
+                    this.unit = newUnit;
+                }
+            })
+            self.currentUserSubject.onNext(self.currentUser);
+        }
+
+        function subscribe(subscription) {
+            self.currentUserSubject.subscribe(subscription);
         }
     }
 
@@ -90,18 +180,18 @@
     function UserServices($resource) {
         /* jshint validthis:true */
         var service = {
-                getProfile: getProfile,
+                getUser: getUser,
                 getSettings: getSettings,
         };
 
         return service;
 
-        function getProfile(user,success) {
-            return $resource('data/'+user.userId + '.json', {}).get(success);
+        function getUser(userId,success,failure) {
+            return $resource('data/'+ userId + '.json', {}).get(success,failure);
         }
 
         function getSettings(user,success) {
-            return $resource('data/'+user.userId + '-settings.json', {}).get(success);
+           return $resource('data/'+user.userId + '-settings.json', {}).get(success);
         }
     }
 
@@ -144,7 +234,11 @@
             }]);
 
         self.currentUser = Auth.getCurrentUser();
-        console.log('AppController.currentUser:' + self.currentUser);
+
+        Auth.subscribe(function(user) {
+            self.currentUser = user;
+            console.log('AppController - new current user:' + self.currentUser.userId);
+        });
 
         self.settingsModal = $modal({controller: "Settings",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
         self.showSettingsModal = function() {
@@ -154,26 +248,27 @@
             self.settingsModal.$promise.then(self.settingsModal.hide);
         };
 
+
     }
 
 })();
-
 (function () {
     angular.module('app.header', ['mgcrea.ngStrap'])
-    .controller('HeaderController', [
-        function () {
-            var self= this;
+        .controller('HeaderController', [HeaderController]);
+    function HeaderController(Base) {
+        var self = this;
 
-            self.profilePopover = {
-                templateUrl: 'components/header/profile-popover.html'
-             }
-        }]);
+        self.profilePopover = {
+            templateUrl: 'components/header/profile-popover.html'
+        }
+
+    };
 })();
 (function() {
     angular.module('app.home.header', [])
-    .controller('HomeHeaderController', ['Auth','ChangeUnit', HomeHeaderController]);
+    .controller('HomeHeaderController', ['Auth','ChangeUnit', 'Base',HomeHeaderController]);
 
-    function HomeHeaderController(Auth,ChangeUnit) {
+    function HomeHeaderController(Auth,ChangeUnit,Base) {
         var self = this,
             changedUnit,
             changeUnitMode = false; 
@@ -193,32 +288,70 @@
             self.changeUnitMode = false;
         }
 
+ //       angular.extend(self, Base);
+
     };
 })();
 (function() {
     angular.module('app.home', [])
-    .controller('HomeController', ['Auth', 'Case', HomeController]);
+    .controller('HomeController', ['Auth', 'Case', 'AuthMixin',HomeController]);
 
-    function HomeController(Auth,Case) {
-        var vm = this,
-            currentUser,
-            latestCases,
-            latestDocuments;
-        vm.currentUser = Auth.getCurrentUser();
-        var cases = Case.getLatestCases(vm.currentUser).query(function () {
-             vm.latestCases = cases;
+    function HomeController(Auth,Case,AuthMixin) {
+        var self = this;
+
+        self.currentUser = Auth.getCurrentUser();
+        var cases = Case.getLatestCases(self.currentUser).query(function () {
+             self.latestCases = cases;
         });
-        var documents = Case.getLatestDocuments(vm.currentUser).query(function () {
-            vm.latestDocuments = documents;
+        var documents = Case.getLatestDocuments(self.currentUser).query(function () {
+            self.latestDocuments = documents;
         });
-    }
+
+        angular.extend(self,AuthMixin);
+     }
 })();
 (function () {
     'use strict';
 
     angular
+        .module('app.user.login', [])
+        .controller('Login', ['Auth','AuthMixin',LoginController]);
+
+    function LoginController(Auth,AuthMixin) {
+        /* jshint validthis:true */
+        var self = this;
+
+        self.credentials = {
+            userId: '',
+            password: ''
+        };
+
+        self.handleLogin = function() {
+            AuthMixin.loginResult(Auth.isAuthenticated());
+        }
+
+        self.cancelLogin = function() {
+            AuthMixin.loginResult(false);
+        }
+
+        self.login = function (credentials) {
+            Auth.login(credentials, self.handleLogin, self.cancelLogin);
+
+        }
+
+        self.cancel = function () {
+            self.cancelLogin();
+       }
+
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
         .module('app.navigation', [])
-        .controller('NavigationController', ['Auth', 'ChangeUnit', NavigationController]);
+        .controller('NavigationController', ['Auth', 'ChangeUnit',NavigationController]);
 
     function NavigationController(Auth, ChangeUnit) {
         /* jshint validthis:true */
@@ -244,6 +377,7 @@
             ChangeUnit.cancelChangeUnit();
             self.changeUnitMode = false;
         }
+
     }
 
 })();
@@ -268,12 +402,7 @@
     angular.module('app.user.profile.header', [])
     .controller('UserProfileHeaderController', ['Auth', UserProfileHeaderController]);
 
-    function UserProfileHeaderController(Auth) {
-        var self = this;
-
-        activate();
-
-        function activate() { }
+    function UserProfileHeaderController() {
     };
 })();
 (function () {
@@ -281,38 +410,55 @@
 
     angular
         .module('app.user.profile', [])
-        .controller('UserProfileController', ['Auth','User',UserProfileController]);
+        .controller('UserProfileController', ['Auth', 'User', 'AuthMixin', UserProfileController]);
 
-    function UserProfileController(Auth,User) { 
-        /* jshint validthis:true */ 
-        var self = this,
-            data = {},
-            backup = {},
-            editPersonalInfo = false;
+    function UserProfileController(Auth, User, AuthMixin) {
+        /* jshint validthis:true */
+        var self = this;
 
-         activate();
+        self.data = {};
+        self.backup = {};
+        self.editPersonalInfo = false;
+        angular.extend(self, AuthMixin);
 
-         function activate() {
-             var user = Auth.getCurrentUser();
-             var profileData = User.getProfile(user, function () {
-                 self.data = profileData;
-             });
-         }
 
-         self.startEditPersonalInfo = function () {
-             self.editPersonalInfo = true;
-             self.backup = _.clone(self.data);
-         }
-         self.savePersonalInfo = function () {
-             self.editPersonalInfo = false;
-             self.backup = null;
-         }
+        self.getUserProfile = function () {
+            var user = Auth.getCurrentUser();
+            if (user) {
+                console.log('UserProfile - current user: ' + user.userId);
+                var profileData = User.getUser(user.userId,
+                            function () {
+                                console.log('Read profile data for ' + profileData.userId);
+                                self.data = profileData;
+                            },
+                            function() {
+                                console.log('Unable to read profile data for ' + user.userId);
+                            });
+                } else {
+                console.log('UserProfile - current user undefined.');
+            }
+        }
 
-         self.cancelEditPersonalInfo = function () {
-              self.data = self.backup;
-             self.backup = null;
-             self.editPersonalInfo = false;
-         }
+
+        self.activate = function() {
+            self.getUserProfile();
+        }
+
+        self.startEditPersonalInfo = function () {
+            self.editPersonalInfo = true;
+            self.backup = _.clone(self.data);
+        }
+        self.savePersonalInfo = function () {
+            self.editPersonalInfo = false;
+            self.backup = null;
+        }
+
+        self.cancelEditPersonalInfo = function () {
+            self.data = self.backup;
+            self.backup = null;
+            self.editPersonalInfo = false;
+        }
+
 
     }
 })();

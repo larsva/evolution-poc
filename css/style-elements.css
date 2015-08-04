@@ -764,6 +764,19 @@ input[type=reset]:hover {
     padding:4px;
 }
 
+/* Login dialog */
+.login-modal-dialog {
+    width: 300px;
+}
+.login-element {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.login-link {
+    width: 100%;
+    margin-bottom: 6px;
+}
+
 
 
 

@@ -1,8 +1,8 @@
 ﻿(function() {
     angular.module('app.home.header', [])
-    .controller('HomeHeaderController', ['Auth','ChangeUnit', HomeHeaderController]);
+    .controller('HomeHeaderController', ['Auth','ChangeUnit', 'Base',HomeHeaderController]);
 
-    function HomeHeaderController(Auth,ChangeUnit) {
+    function HomeHeaderController(Auth,ChangeUnit,Base) {
         var self = this,
             changedUnit,
             changeUnitMode = false; 
@@ -21,6 +21,8 @@
             ChangeUnit.cancelChangeUnit();
             self.changeUnitMode = false;
         }
+
+ //       angular.extend(self, Base);
 
     };
 })();

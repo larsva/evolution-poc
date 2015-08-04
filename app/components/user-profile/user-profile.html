@@ -12,20 +12,22 @@
 
         <div class="tablerowgroup">
             <div class="tablerow">
-                 <div class="tablecell cellmain noborder">
+                <div class="tablecell cellmain noborder">
                     Användarnamn:
-                </div><!-- tablecell -->
+                </div>
+                <div class="tablecell noborder user-profile-data">
                     <span ng-hide="userProfile.editPersonalInfo">{{userProfile.data.userId}}</span>
                     <input type="text" ng-model="userProfile.data.userId" ng-show="userProfile.editPersonalInfo" />
-                <div class="tablecell noborder"></div><!-- tablecell -->
-            </div><!-- tablerow -->
-        </div><!-- tablerowgroup -->
+                </div>
+                <div class="tablecell noborder"></div>
+            </div>
+        </div>
 
         <div class="tablerowgroup">
             <div class="tablerow">
                 <div class="tablecell cellmain noborder"> 
                     Förnamn:
-                </div><!-- tablecell -->
+                </div>
                 <div class="tablecell noborder user-profile-data">
                     <span ng-hide="userProfile.editPersonalInfo">{{userProfile.data.firstName}}</span>
                     <input type="text" ng-model="userProfile.data.firstName" ng-show="userProfile.editPersonalInfo"/>

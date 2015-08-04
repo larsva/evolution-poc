@@ -3,7 +3,7 @@
 
     angular
         .module('app.navigation', [])
-        .controller('NavigationController', ['Auth', 'ChangeUnit', NavigationController]);
+        .controller('NavigationController', ['Auth', 'ChangeUnit',NavigationController]);
 
     function NavigationController(Auth, ChangeUnit) {
         /* jshint validthis:true */
@@ -29,6 +29,7 @@
             ChangeUnit.cancelChangeUnit();
             self.changeUnitMode = false;
         }
+
     }
 
 })();

@@ -3,7 +3,8 @@
     angular.module('app.auth.service', []).
     factory('Auth', function () {
         /* jshint validthis:true */
-        var service = { getCurrentUser: getCurrentUser};
+        var service = { getCurrentUser: getCurrentUser,
+                        subscribe: subscribe};
 
         return service;
 
@@ -16,7 +17,9 @@
                     return this.firstName + ' ' + this.lastName;
                 }
             };
-        }
+        };
+
+        function subscribe() {};
 
     });
 })();

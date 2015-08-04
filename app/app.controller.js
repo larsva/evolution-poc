@@ -35,7 +35,11 @@
             }]);
 
         self.currentUser = Auth.getCurrentUser();
-        console.log('AppController.currentUser:' + self.currentUser);
+
+        Auth.subscribe(function(user) {
+            self.currentUser = user;
+            console.log('AppController - new current user:' + self.currentUser.userId);
+        });
 
         self.settingsModal = $modal({controller: "Settings",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
         self.showSettingsModal = function() {
@@ -44,6 +48,7 @@
         self.hideSettingsModal = function() {
             self.settingsModal.$promise.then(self.settingsModal.hide);
         };
+
 
     }
 

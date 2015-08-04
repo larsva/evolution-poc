@@ -1,18 +1,18 @@
 ﻿(function() {
     angular.module('app.home', [])
-    .controller('HomeController', ['Auth', 'Case', HomeController]);
+    .controller('HomeController', ['Auth', 'Case', 'AuthMixin',HomeController]);
 
-    function HomeController(Auth,Case) {
-        var vm = this,
-            currentUser,
-            latestCases,
-            latestDocuments;
-        vm.currentUser = Auth.getCurrentUser();
-        var cases = Case.getLatestCases(vm.currentUser).query(function () {
-             vm.latestCases = cases;
+    function HomeController(Auth,Case,AuthMixin) {
+        var self = this;
+
+        self.currentUser = Auth.getCurrentUser();
+        var cases = Case.getLatestCases(self.currentUser).query(function () {
+             self.latestCases = cases;
         });
-        var documents = Case.getLatestDocuments(vm.currentUser).query(function () {
-            vm.latestDocuments = documents;
+        var documents = Case.getLatestDocuments(self.currentUser).query(function () {
+            self.latestDocuments = documents;
         });
-    }
+
+        angular.extend(self,AuthMixin);
+     }
 })();
