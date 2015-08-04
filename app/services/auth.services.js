@@ -33,8 +33,9 @@
             });
         }
 
-        function logout(userId) {
+        function logout() {
             self.currentUser = null;
+            self.currentUserSubject.onNext(self.currentUser);
         }
 
         function getCurrentUser() {

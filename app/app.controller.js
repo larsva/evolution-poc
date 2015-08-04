@@ -8,9 +8,9 @@
                 html: true
             });
         })
-        .controller('App', ['$modal','$router','Auth',AppController]);
+        .controller('App', ['$location','$modal','$router','Auth',AppController]);
 
-    function AppController($modal,$router, Auth) {
+    function AppController($location,$modal,$router, Auth) {
         var self = this;
 
         $router.config([
@@ -49,7 +49,14 @@
             self.settingsModal.$promise.then(self.settingsModal.hide);
         };
 
+        self.logout = function() {
+            Auth.logout();
+            $location.path('/home');
+        };
 
+        self.hsAuthenticatedUser = function() {
+            return Auth.isAuthenticated();
+        }
     }
 
 })();
