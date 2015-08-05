@@ -3,9 +3,9 @@
 
     angular
         .module('app.user.login', [])
-        .controller('Login', ['Auth','AuthMixin',LoginController]);
+        .controller('Login', ['Auth','AuthMixin','AUTH',LoginController]);
 
-    function LoginController(Auth,AuthMixin) {
+    function LoginController(Auth,AuthMixin,AUTH) {
         /* jshint validthis:true */
         var self = this;
 
@@ -20,11 +20,11 @@
             if (!isAuthenticated) {
                 self.errorMessage = 'Ogiltigt användarnamn och/eller lösenord';
             }
-            AuthMixin.loginResult(isAuthenticated ? 'authenticated' : 'not_authenticated');
+            AuthMixin.loginResult(isAuthenticated ? AUTH.AUTHENTICATED : AUTH.NOT_AUTHENTICATED);
         };
 
         self.cancelLogin = function() {
-            AuthMixin.loginResult('cancel');
+            AuthMixin.loginResult(AUTH.LOGIN_CANCELLED);
         };
 
         self.login = function (credentials) {

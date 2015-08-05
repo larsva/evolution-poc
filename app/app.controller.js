@@ -36,7 +36,7 @@
 
         Auth.subscribe(function(user) {
             self.currentUser = user;
-            console.log('AppController - new current user:' + self.currentUser.userId);
+            console.log('AppController - new current user:' + (self.currentUser != null ? self.currentUser.userId : 'null'));
         });
 
         self.settingsModal = $modal({controller: "Settings",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
@@ -48,9 +48,14 @@
         };
 
         self.logout = function() {
-            Auth.logout();
-            $location.path('/home');
-        };
+             Auth.logout();
+             var path = $location.path();
+             if ('/home' === path) {
+                 $router.renavigate();
+             } else {
+                 $location.path('/home');
+             }
+         };
 
         self.hsAuthenticatedUser = function() {
             return Auth.isAuthenticated();

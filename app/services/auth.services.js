@@ -3,6 +3,13 @@
 
     angular
         .module('app')
+        .constant('AUTH', {
+            AUTHENTICATED: 'authenticated',
+            NOT_AUTHENTICATED: 'not_authenticated',
+            LOGIN_CANCELLED: 'login_cancelled',
+            LOGIN_STARTED: 'login_started',
+            LOGIN_FINISHED: 'login_finished'
+        })
         .factory('Auth', ['User', AuthServices]);
 
     function AuthServices(User) {

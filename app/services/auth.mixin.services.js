@@ -3,11 +3,13 @@
 
     angular
         .module('app')
-        .service('AuthMixin', ['$q','$location','$modal','Auth',AuthMixinServices]);
+        .service('AuthMixin', ['$q','$location','$modal','Auth','AUTH',AuthMixinServices]);
 
-    function AuthMixinServices($q,$location,$modal,Auth) {
+    function AuthMixinServices($q,$location,$modal,Auth,AUTH) {
         /* jshint validthis:true */
         var self = this;
+
+        self.loginSubject = new Rx.ReplaySubject();
 
         self.service = {
             loginResult: loginResult,
@@ -29,7 +31,7 @@
             self.loginModal.$promise.then(function () {
                 self.loginModal.show().then(function(res) {
                     console.log('Logged in: ' + res);
-                    if (res == 'authenticated') {
+                    if (res == AUTH.AUTHENTICATED) {
                         modalDeferred.resolve();
                         self.loginModal.hide();
                     } else {
