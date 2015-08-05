@@ -3,9 +3,9 @@
 
     angular
         .module('app')
-        .factory('Login', ['$q', '$location', '$modal', 'Auth', 'AUTH', LoginServices]);
+        .factory('Login', ['$q', '$location', '$modal', 'Auth', 'AUTH', LoginService]);
 
-    function LoginServices($q, $location, $modal, Auth, AUTH) {
+    function LoginService($q, $location, $modal, Auth, AUTH) {
         /* jshint validthis:true */
         var self = this;
 

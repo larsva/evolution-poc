@@ -7,15 +7,12 @@
 
     function ChangeUnitService() {
 
-        var self = this,
-            changedUnit,
-            service = {
-                startChangeUnit: startChangeUnit,
-                saveUnit: saveUnit,
-                cancelChangeUnit: cancelChangeUnit,
-            };
 
-        return service;
+        return {
+            startChangeUnit: startChangeUnit,
+            saveUnit: saveUnit,
+            cancelChangeUnit: cancelChangeUnit,
+        };
 
         function startChangeUnit(currentUser) {
             return currentUser.unit;
@@ -26,7 +23,8 @@
             user.setUnit(newUnit);
         }
 
-        function cancelChangeUnit() { }
+        function cancelChangeUnit() {
+        }
 
     }
 

@@ -3,9 +3,9 @@
 
     angular
         .module('app')
-        .service('AuthMixin', ['$location','Auth','Login',AuthMixinServices]);
+        .service('AuthMixin', ['$location','Auth','Login',AuthMixinService]);
 
-    function AuthMixinServices($location,Auth,Login) {
+    function AuthMixinService($location,Auth,Login) {
         /* jshint validthis:true */
         var self = this;
 
@@ -23,6 +23,7 @@
             if (!authenticated) {
                  return Login.login();
             }
+            console.log('Activate route change to: ' + $location.path());
             return true;
         };
 

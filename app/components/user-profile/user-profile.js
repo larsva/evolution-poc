@@ -30,28 +30,29 @@
                 } else {
                 console.log('UserProfile - current user undefined.');
             }
-        }
+        };
 
 
         self.activate = function() {
+            AuthMixin.activate();
             self.getUserProfile();
-        }
+        };
 
         self.startEditPersonalInfo = function () {
             self.editPersonalInfo = true;
             self.backup = _.clone(self.data);
-        }
+        };
+
         self.savePersonalInfo = function () {
             self.editPersonalInfo = false;
             self.backup = null;
-        }
+        };
 
         self.cancelEditPersonalInfo = function () {
             self.data = self.backup;
             self.backup = null;
             self.editPersonalInfo = false;
-        }
-
+        };
 
     }
 })();
