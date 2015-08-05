@@ -1,9 +1,10 @@
 {
 	"version": "1.0.0",
-	"name": "angular_test",
+	"name": "evolution-web",
 	"private": true,
   "devDependencies": {
       "grunt": "^0.4.5",
+      "grunt-cli": "^0.1.13",
       "grunt-bowercopy": "^1.2.0",
       "karma": "^0.12.31",
       "karma-jasmine": "^0.3.5",
