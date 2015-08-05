@@ -1,3 +1,10 @@
+/**
+ * Mixin service class that is injected in all component controllers where
+ * the user needs to be authenticated to access.
+ *
+ * If the user is not authenticated, i.e. current user is null, then
+ * a login dialog is shown.
+ */
 (function () {
     'use strict';
 
