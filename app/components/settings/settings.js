@@ -11,6 +11,6 @@
             self.settingsModel = temp;
         });
 
-    };
+    }
 
 })();

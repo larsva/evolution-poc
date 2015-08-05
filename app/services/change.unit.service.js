@@ -11,15 +11,14 @@
         return {
             startChangeUnit: startChangeUnit,
             saveUnit: saveUnit,
-            cancelChangeUnit: cancelChangeUnit,
+            cancelChangeUnit: cancelChangeUnit
         };
 
         function startChangeUnit(currentUser) {
             return currentUser.unit;
         }
 
-        function saveUnit(currentUser, newUnit) {
-            var user = currentUser;
+        function saveUnit(user, newUnit) {
             user.setUnit(newUnit);
         }
 

@@ -5,7 +5,7 @@
         .module('app')
         .factory('Login', ['$q', '$location', '$modal', 'Auth', 'AUTH', LoginService]);
 
-    function LoginService($q, $location, $modal, Auth, AUTH) {
+    function LoginService($q, $modal, AUTH) {
         /* jshint validthis:true */
         var self = this;
 
@@ -62,12 +62,12 @@
             var modalDeferred = $q.defer();
             self.showLoginDialog(modalDeferred);
             return modalDeferred.promise;
-        };
+        }
 
         function handleLoginResult(res) {
             console.log('Login result: ' + res);
             self.deferred.resolve(res);
-        };
+        }
 
         function subscribe(subscription) {
             self.loginSubject.subscribe(subscription);

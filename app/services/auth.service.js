@@ -53,6 +53,7 @@
             return self.currentUser != null;
         }
 
+        //noinspection JSUnusedLocalSymbols
         function isAuthorized(roles) {
             return self.isAuthenticated();
         }
