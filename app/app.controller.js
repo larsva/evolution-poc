@@ -8,10 +8,12 @@
                 html: true
             });
         })
-        .controller('App', ['$location','$modal','$router','Auth',AppController]);
+        .controller('App', ['$location','$modal','$router','Auth','AUTH','Login',AppController]);
 
-    function AppController($location,$modal,$router, Auth) {
+    function AppController($location,$modal,$router, Auth,AUTH,Login) {
         var self = this;
+
+        self.hideContent = false;
 
         $router.config([
             {path: '/', redirectTo:'/home'},
@@ -38,6 +40,10 @@
             self.currentUser = user;
             console.log('AppController - new current user:' + (self.currentUser != null ? self.currentUser.userId : 'null'));
         });
+
+        Login.subscribe(function(state) {
+            self.hideContent = AUTH.LOGIN_STARTED === state;
+         });
 
         self.settingsModal = $modal({controller: "Settings",controllerAs: 'settings', templateUrl: 'components/settings/settings.tpl.html', show: false});
         self.showSettingsModal = function() {
