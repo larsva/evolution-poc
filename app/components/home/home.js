@@ -1,16 +1,16 @@
 ﻿(function() {
     angular.module('app.home', [])
-    .controller('HomeController', ['Auth', 'Case', 'AuthMixin','ChangeUnit',HomeController]);
+    .controller('HomeController', ['Auth', 'Case','Document', 'AuthMixin','ChangeUnit',HomeController]);
 
-    function HomeController(Auth,Case,AuthMixin,ChangeUnit) {
+    function HomeController(Auth,Case,Document,AuthMixin,ChangeUnit) {
         var self = this;
 
         self.currentUser = Auth.getCurrentUser();
-        var cases = Case.getLatestCases(self.currentUser).query(function () {
-             self.latestCases = cases;
+        var cases = Case.getLastOpenedCases(self.currentUser).query(function () {
+             self.lastOpenedCases = cases;
         });
-        var documents = Case.getLatestDocuments(self.currentUser).query(function () {
-            self.latestDocuments = documents;
+        var documents = Document.getLastOpenedDocuments(self.currentUser).query(function () {
+            self.lastOpenedDocuments = documents;
         });
 
         self.startChangeUnit = function() {

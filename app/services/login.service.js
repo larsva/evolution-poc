@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .factory('Login', ['$q', '$location', '$modal', 'Auth', 'AUTH', LoginService]);
+        .factory('Login', ['$q', '$modal', 'AUTH', LoginService]);
 
     function LoginService($q, $modal, AUTH) {
         /* jshint validthis:true */

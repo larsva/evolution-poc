@@ -3,9 +3,9 @@
 
     angular
         .module('app.user.login', [])
-        .controller('LoginController', ['Auth','Login','AUTH',LoginController]);
+        .controller('LoginController', ['focus', 'Auth', 'Login', 'AUTH', LoginController]);
 
-    function LoginController(Auth,Login,AUTH) {
+    function LoginController(focus, Auth, Login, AUTH) {
         /* jshint validthis:true */
         var self = this;
 
@@ -15,15 +15,15 @@
             password: ''
         };
 
-        self.handleLogin = function() {
+        self.handleLogin = function () {
             var isAuthenticated = Auth.isAuthenticated();
             if (!isAuthenticated) {
                 self.errorMessage = 'Ogiltigt användarnamn och/eller lösenord';
             }
-           Login.handleLoginResult(isAuthenticated ? AUTH.AUTHENTICATED : AUTH.NOT_AUTHENTICATED);
+            Login.handleLoginResult(isAuthenticated ? AUTH.AUTHENTICATED : AUTH.NOT_AUTHENTICATED);
         };
 
-        self.cancelLogin = function() {
+        self.cancelLogin = function () {
             Login.handleLoginResult(AUTH.LOGIN_CANCELLED);
         };
 
@@ -34,7 +34,9 @@
 
         self.cancel = function () {
             self.cancelLogin();
-       }
+        };
+
+        focus('user_id');
 
     }
 })();

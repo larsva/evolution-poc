@@ -17,7 +17,7 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            files: ["app/**/*.js",'app/**/*.html','css/**/*.css','fonts/*.ttf','images/*'],
+            files: ["app/**/*.js", 'app/**/*.html', 'css/**/*.css', 'fonts/*.ttf', 'images/*', 'test/**/*.js'],
             tasks: ["all"]
         },
         bowercopy: {
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
                 expand: true,
                 flatten: false,
                 filter: 'isFile',
-                cwd:'app/',
+                cwd: 'app/',
                 src: ['components/**/*.html'],
                 dest: 'wwwroot/'
             },
@@ -69,7 +69,7 @@ module.exports = function (grunt) {
                 expand: true,
                 flatten: false,
                 filter: 'isFile',
-                src: ['css/*', 'fonts/*', 'images/*','data/**'],
+                src: ['css/*', 'fonts/*', 'images/*', 'data/**'],
                 dest: 'wwwroot/'
             }
         },
@@ -83,10 +83,10 @@ module.exports = function (grunt) {
                 configFile: 'test/karma.conf.js',
                 background: false,
                 singleRun: false
+            }
         }
-    }
 
-});
+    });
 
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-copy");
@@ -96,10 +96,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-karma');
- 
-    grunt.registerTask("all", ['clean', 'jshint', 'karma:unit','bowercopy', 'concat', 'copy:js', 'copy:html', 'copy:components', 'copy:content']);
+
+    grunt.registerTask("all", ['clean', 'jshint', 'karma:unit', 'bowercopy', 'concat', 'copy:js', 'copy:html', 'copy:components', 'copy:content']);
     grunt.registerTask('test', [
-      'jshint',
-      'karma:unit'
+        'jshint',
+        'karma:unit'
     ]);
-}
+};

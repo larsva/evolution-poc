@@ -40,7 +40,7 @@
 
 
         
-        <div class="tablerowgroup" data-ng-repeat='case in home.latestCases '>
+        <div class="tablerowgroup" data-ng-repeat='case in home.lastOpenedCases '>
             <div class="tablerow">
                 <div class="tablecell cellmain cfslarge">
                     <img src="images/icon-case-black.svg" class="icon-folder" alt="Mapp" />{{case.name}}
@@ -83,7 +83,7 @@
 
 
 
-        <div class="tablerowgroup" data-ng-repeat='doc in home.latestDocuments'>
+        <div class="tablerowgroup" data-ng-repeat='doc in home.lastOpenedDocuments'>
             <div class="tablerow">
                 <div class="tablecell cellmain cfslarge">
                     <img src="images/icon-document-text.svg" class="icon-folder" alt="Mapp" />{{doc.name}}

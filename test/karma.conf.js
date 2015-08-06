@@ -19,7 +19,7 @@ module.exports = function (config) {
             'bower_components/angular-strap/dist/angular-strap.js',
             'bower_components/rxjs/dist/rx.lite.js',
             'bower_components/angular-mocks/angular-mocks.js',
-            'app/**/*.module.js', 'app/**/*.services.js', 'app/**/*.controller.js', 'app/**/*.js',
+            'app/**/*.module.js', 'app/**/*.service.js', 'app/**/*.controller.js', 'app/**/*.js',
             'test/unit/**/*.js'
     ],
 
