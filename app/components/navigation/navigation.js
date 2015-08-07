@@ -5,7 +5,7 @@
         .module('app.navigation', [])
         .controller('NavigationController', ['Auth', 'ChangeUnit',NavigationController]);
 
-    function NavigationController(Auth, ChangeUnit) {
+    function NavigationController($scope,Auth, ChangeUnit) {
         /* jshint validthis:true */
         var self = this;
 
@@ -24,6 +24,26 @@
         self.cancelChangeUnit = function () {
             ChangeUnit.cancelChangeUnit();
             self.changeUnitMode = false;
+        };
+
+        $scope.caseTreeOptions = {
+            nodeChildren: "children",
+            dirSelectable: true
+        };
+
+        self.caseTreeData = [
+                { "name" : "Mappar och dokument", "id" : "0", "type" : "root",
+                "children": [
+                    {"name" : "Mapp 1", "id" : "1", "type" : "folder", "children" :[
+                        {"name" : "File 11", "id" : "11", "type" : "file", "children" :[]}
+                    ]},
+                    {"name" : "Mapp 2", "id" : "2", "type" : "folder", "children" :[]},
+                    {"name" : "File 1", "id" : "3", "type" : "file", "children" :[]},
+                ]}
+        ];
+
+        self.handleCaseSelection = function(node) {
+            console.log('Selected node: ' + node.name);
         };
 
     }

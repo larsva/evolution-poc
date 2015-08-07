@@ -783,6 +783,14 @@ input[type=reset]:hover {
     color:red;
 }
 
+/* Case tree */
+.case-iexpanded {
+    background: url("../images/icon-folder-white.svg") no-repeat;
+}
+.case-icollapsed {
+    background: url("../images/icon-folder-white.svg") no-repeat;
+}
+
 
 
 

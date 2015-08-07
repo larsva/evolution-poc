@@ -1,10 +1,18 @@
-﻿<a href="#"><img src="images/icon-nav-arrow-dark.svg" class="nav-arrow" alt="Minimera menyn" /></a>
+﻿<a href="#"><img src="images/icon-nav-arrow-dark.svg" class="nav-arrow" alt="Minimera menyn"/></a>
 <nav class="navigation">
     <ul>
-        <li><a href="#" class="tree-link"><img src="images/icon-nav-arrow-white.svg" class="nav-arrow-icon" /></a> <img src="images/icon-folder-white.svg" alt="Mappar och Dokument" width="22" height="16" class="nav-icon" /><a href="#">Mappar och Dokument</a></li>
-        <li><img src="images/icon-case-white.svg" alt="Ärenden" width="22" height="15" class="nav-icon" /><a href="#">Ärenden</a></li>
+        <li>
+            <div class="treecontrol-container">
+                <treecontrol class="tree-light" tree-model="navigation.caseTreeData" options="caseTreeOptions"
+                             on-selection="navigation.handleCaseSelection(node)">
+                    {{node.name}}
+                </treecontrol>
+            </div>
+        </li>
+        <li><img src="images/icon-case-white.svg" alt="Ärenden" width="22" height="15" class="nav-icon"/><a href="#">Ärenden</a>
+        </li>
         <li class="div-above">
-            Snabbgenvägar
+            <img src="images/icon-search-white.svg" width="22" height="16" class="nav-icon"/>Snabbgenvägar
             <ul>
                 <li><a href="#">Senaste Skapade</a></li>
                 <li><a href="#">Senaste Sparade</a></li>
@@ -16,13 +24,16 @@
             </ul>
         </li>
         <li class="navsmall" ng-hide="navigation.changeUnitMode">
-            Byt enhet<br />
-            <a href="#" ng-click="navigation.startChangeUnit(); $event.preventDefault()">{{app.currentUser.unit.name}}</a>
+            Byt enhet<br/>
+            <a href="#"
+               ng-click="navigation.startChangeUnit(); $event.preventDefault()">{{app.currentUser.unit.name}}</a>
         </li>
         <li class="navsmall" ng-show="navigation.changeUnitMode">
-             <div class="cfslarge" ng-show="navigation.changeUnitMode">
-                <select data-ng-model="navigation.changedUnit" data-ng-options="unit as unit.name for unit in app.currentUser.units track by unit.name"></select>
-                <a href="#" ng-click="navigation.saveUnit(); $event.preventDefault()" class="marginright">Spara</a><a href="#" ng-click="navigation.cancelChangeUnit(); $event.preventDefault()">Avbryt</a>
+            <div class="cfslarge" ng-show="navigation.changeUnitMode">
+                <select data-ng-model="navigation.changedUnit"
+                        data-ng-options="unit as unit.name for unit in app.currentUser.units track by unit.name"></select>
+                <a href="#" ng-click="navigation.saveUnit(); $event.preventDefault()" class="marginright">Spara</a><a
+                    href="#" ng-click="navigation.cancelChangeUnit(); $event.preventDefault()">Avbryt</a>
             </div>
         </li>
         <li class="navsmall"><a href="#">Hjälp</a></li>

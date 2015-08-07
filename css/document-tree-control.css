@@ -7,10 +7,14 @@ treecontrol {
     user-select: none;
 
     /* default */
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    font-size:13px;
-    color: #555;
+    font-family: 'Lato-Light', arial, sans-serif;
+    font-size:14px;
+    color: #5491db;
     text-decoration: none;
+}
+
+.treecontrol-container {
+    margin-left: -15px;
 }
 
 treecontrol ul {
@@ -23,8 +27,14 @@ treecontrol ul {
 
 treecontrol li {
     position: relative;
-    padding: 0 0 0 20px;
+    padding: 0;
     line-height: 20px;
+}
+
+treecontrol span {
+    font-family: 'Lato-Light', arial, sans-serif;
+    font-size:14px;
+    color: #5491db;
 }
 
 treecontrol li.tree-expanded i.tree-leaf-head, treecontrol li.tree-collapsed i.tree-leaf-head {display:none;}
@@ -70,17 +80,19 @@ treecontrol.tree-classic li .tree-unselectable {
 }
 
 treecontrol.tree-light li.tree-expanded i.tree-branch-head {
-    padding: 1px 10px;
-    background: url("../images/node-opened-2.png") no-repeat;
+    padding: 1px 16px;
+    background: url("../images/icon-nav-arrow-white.svg") no-repeat;
+    background-size: 17px 12px;
 }
 
 treecontrol.tree-light li.tree-collapsed i.tree-branch-head {
-    padding: 1px 10px;
-    background: url("../images/node-closed-2.png") no-repeat;
+    padding: 1px 16px;
+    background: url("../images/icon-nav-arrow-white-closed.svg") no-repeat;
+    background-size: 12px 17px;
 }
 
 treecontrol.tree-light li.tree-leaf i.tree-leaf-head {
-    padding: 1px 10px;
+    padding: 1px 16px;
     width: 16px; height: 16px;
     background: none no-repeat;
 }
@@ -94,19 +106,19 @@ treecontrol.tree-light li .tree-unselectable {
 }
 
 treecontrol.tree-dark li.tree-expanded i.tree-branch-head {
-    padding: 1px 10px;
-    background: url("../images/node-opened-light.png") no-repeat;
+    padding: 1px 16px;
+    background: url("../images/icon-folder-white.svg") no-repeat;
 }
 
 treecontrol.tree-dark li.tree-collapsed i.tree-branch-head {
-    padding: 1px 10px;
-    background: url("../images/node-closed-light.png") no-repeat;
+    padding: 1px 16px;
+    background: url("../images/icon-folder-white.svg") no-repeat;
 }
 
 treecontrol.tree-dark li.tree-leaf i.tree-leaf-head {
-    padding: 1px 10px;
+    padding: 1px 16px;
     width: 16px; height: 16px;
-    background: none no-repeat;
+    background: url("../images/icon-folder-white.svg") no-repeat;
 }
 
 treecontrol.tree-dark li .tree-selected {
