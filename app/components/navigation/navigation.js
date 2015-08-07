@@ -3,12 +3,14 @@
 
     angular
         .module('app.navigation', [])
-        .controller('NavigationController', ['Auth', 'ChangeUnit',NavigationController]);
+        .controller('NavigationController', ['Auth', 'ChangeUnit', 'Document', NavigationController]);
 
-    function NavigationController($scope,Auth, ChangeUnit) {
+
+    function NavigationController(Auth, ChangeUnit, Document) {
         /* jshint validthis:true */
         var self = this;
-
+        self.document = Document;
+        self.documentTreeData = [];
         self.changeUnitMode = false;
 
         self.startChangeUnit = function () {
@@ -17,7 +19,7 @@
         };
 
         self.saveUnit = function () {
-            ChangeUnit.saveUnit(Auth.getCurrentUser(),self.changedUnit);
+            ChangeUnit.saveUnit(Auth.getCurrentUser(), self.changedUnit);
             self.changeUnitMode = false;
         };
 
@@ -26,26 +28,20 @@
             self.changeUnitMode = false;
         };
 
-        $scope.caseTreeOptions = {
-            nodeChildren: "children",
-            dirSelectable: true
-        };
 
-        self.caseTreeData = [
-                { "name" : "Mappar och dokument", "id" : "0", "type" : "root",
-                "children": [
-                    {"name" : "Mapp 1", "id" : "1", "type" : "folder", "children" :[
-                        {"name" : "File 11", "id" : "11", "type" : "file", "children" :[]}
-                    ]},
-                    {"name" : "Mapp 2", "id" : "2", "type" : "folder", "children" :[]},
-                    {"name" : "File 1", "id" : "3", "type" : "file", "children" :[]},
-                ]}
-        ];
+        var documentTreeData = Document.getDocuments().query(function () {
+            self.documentTreeData = documentTreeData;
+        });
 
-        self.handleCaseSelection = function(node) {
+        self.handleDocumentSelection = function (node) {
             console.log('Selected node: ' + node.name);
         };
 
+
     }
+
+    NavigationController.prototype.activate = function($scope) {
+       $scope.options = this.document.getDocumentTreeOptions();
+    };
 
 })();

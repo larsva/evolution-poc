@@ -10,7 +10,7 @@
             <select data-ng-model="home.changedUnit" data-ng-options="unit as unit.name for unit in app.currentUser.units track by unit.name"></select>
             <a href="#" ng-click="home.saveUnit()" class="marginright">Spara</a><a href="#" ng-click="home.cancelChangeUnit()">Avbryt</a>
         </div>
-        <div class="cfslarge" ng-hide="home.changeUnitMode"><a href="/userProfile" >Redigera min profil</a></div>
+        <div class="cfslarge" ng-hide="home.changeUnitMode"><a ng-link="user-profile">Redigera min profil</a></div>
     </div>
 </div><!-- end list-meta-bar -->
 <div id="page-content">

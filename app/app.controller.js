@@ -23,7 +23,7 @@
                     'header': 'header',
                     'navigation': 'navigation',
                     'content': 'home'
-                }
+                }, as: 'home'
             },
             {
                 path: '/userProfile',
@@ -31,7 +31,15 @@
                     'header': 'header',
                     'navigation': 'navigation',
                     'content': 'userProfile'
-                }
+                } , as: 'user-profile'
+            },
+            {
+                path: '/document/:id',
+                components: {
+                    'header': 'header',
+                    'navigation': 'navigation',
+                    'content': 'document'
+                }, as: 'document'
             }]);
 
         self.currentUser = Auth.getCurrentUser();

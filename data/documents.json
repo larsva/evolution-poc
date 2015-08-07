@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Mapp 1",
+    "id": "1",
+    "type": "folder",
+    "children": [
+      {
+        "name": "File 11",
+        "id": "11",
+        "type": "file",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Mapp 2",
+    "id": "2",
+    "type": "folder",
+    "children": []
+  },
+  {
+    "name": "File 1",
+    "id": "3",
+    "type": "file",
+    "children": []
+  }
+]

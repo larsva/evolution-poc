@@ -8,7 +8,9 @@
     function DocumentService($resource) {
         /* jshint validthis:true */
         return {
-            getLastOpenedDocuments: getLastOpenedDocuments
+            getLastOpenedDocuments: getLastOpenedDocuments,
+            getDocumentTreeOptions: getDocumentTreeOptions,
+            getDocuments: getDocuments
         };
 
         //noinspection JSUnusedLocalSymbols
@@ -16,7 +18,20 @@
             return $resource('data/last-opened-documents.json', {}, {
                 query: {method: 'GET', params: {}, isArray: true}
             });
-        }
+        };
+
+        function getDocumentTreeOptions() {
+            return {
+                nodeChildren: "children",
+                dirSelectable: true
+            };
+        };
+
+        function getDocuments() {
+            return $resource('data/documents.json', {}, {
+                query: {method: 'GET', params: {}, isArray: true}
+            });
+        };
     }
 
 })();

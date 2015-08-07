@@ -265,13 +265,18 @@ img {
 
 .navigation .navsmall {
     font-size: 13px;
-    line-height: 1rem;  
+    line-height: 1rem;
+    margin-left: 2.5rem;
 }
 
 .div-above {
     border-top: 1px solid #fff;
     margin-top: 20px;
     padding-top: 20px;
+}
+
+.navigation .short-cuts li {
+    margin-left: 2.5rem;
 }
 
 .nav-arrow {

@@ -8,14 +8,12 @@ treecontrol {
 
     /* default */
     font-family: 'Lato-Light', arial, sans-serif;
-    font-size:14px;
+    font-size:13px;
     color: #5491db;
     text-decoration: none;
 }
 
-.treecontrol-container {
-    margin-left: -15px;
-}
+.treecontrol-container {}
 
 treecontrol ul {
     margin: 0;
@@ -29,11 +27,12 @@ treecontrol li {
     position: relative;
     padding: 0;
     line-height: 20px;
+    margin-left:30px
 }
 
-treecontrol span {
+treecontrol a {
     font-family: 'Lato-Light', arial, sans-serif;
-    font-size:14px;
+    font-size:13px;
     color: #5491db;
 }
 
@@ -80,20 +79,20 @@ treecontrol.tree-classic li .tree-unselectable {
 }
 
 treecontrol.tree-light li.tree-expanded i.tree-branch-head {
-    padding: 1px 16px;
+    padding: 1px 12px;
     background: url("../images/icon-nav-arrow-white.svg") no-repeat;
     background-size: 17px 12px;
+    background-position: center;
 }
 
 treecontrol.tree-light li.tree-collapsed i.tree-branch-head {
-    padding: 1px 16px;
+    padding: 1px 8px;
     background: url("../images/icon-nav-arrow-white-closed.svg") no-repeat;
     background-size: 12px 17px;
 }
 
 treecontrol.tree-light li.tree-leaf i.tree-leaf-head {
-    padding: 1px 16px;
-    width: 16px; height: 16px;
+    padding: 1px 8px;
     background: none no-repeat;
 }
 
