@@ -16,7 +16,7 @@
         var self = this;
 
 
-        self.currentUserSubject = new Rx.ReplaySubject();
+        self.currentUserSubject = new Rx.Subject();
         self.service = {
             login: login,
             logout: logout,
@@ -74,7 +74,7 @@
         }
 
         function subscribe(subscription) {
-            self.currentUserSubject.subscribe(subscription);
+            return self.currentUserSubject.subscribe(subscription);
         }
     }
 

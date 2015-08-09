@@ -19,8 +19,7 @@
 
         self.service = {
             canActivate: canActivate,
-            activate: activate
-          };
+        };
 
         return self.service;
 
@@ -32,10 +31,7 @@
             }
             console.log('Activate route change to: ' + $location.path());
             return true;
-        }
+        };
 
-        function activate() {
-            console.log("Activate " + $location.path());
-        }
-    }
+     }
 })();

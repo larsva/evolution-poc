@@ -3,15 +3,19 @@
 
     angular
         .module('app.navigation', [])
-        .controller('NavigationController', ['Auth', 'ChangeUnit', 'Document', NavigationController]);
+        .controller('NavigationController', ['Auth', 'ChangeUnit', 'Document', 'DocumentTree','DOCUMENT_TREE','AuthMixin', NavigationController]);
 
 
-    function NavigationController(Auth, ChangeUnit, Document) {
+    function NavigationController(Auth, ChangeUnit, Document, DocumentTree,DOCUMENT_TREE,AuthMixin) {
         /* jshint validthis:true */
         var self = this;
         self.document = Document;
+        self.authMixin = AuthMixin;
+        self.documenTree = DocumentTree;
+        self.documenTreeConstants = DOCUMENT_TREE;
         self.documentTreeData = [];
         self.changeUnitMode = false;
+        self.documentTreeActivated = false;
 
         self.startChangeUnit = function () {
             self.changedUnit = ChangeUnit.startChangeUnit(Auth.getCurrentUser());
@@ -33,15 +37,25 @@
             self.documentTreeData = documentTreeData;
         });
 
-        self.handleDocumentSelection = function (node) {
-            console.log('Selected node: ' + node.name);
+        self.handleDocumentTreeStateChange = function (state) {
+            self.documentTreeActivated = state === DOCUMENT_TREE.ACTIVATED;
         };
 
+        self.handleDocumentSelection = function(selectedNode) {
+            DocumentTree.setSelectedNode(selectedNode);
+        };
 
     }
 
-    NavigationController.prototype.activate = function($scope) {
-       $scope.options = this.document.getDocumentTreeOptions();
+    NavigationController.prototype.activate = function ($scope) {
+        console.log('Activate navigation');
+        $scope.options = this.document.getDocumentTreeOptions();
+        this.documentTreeStateSubscription = this.documenTree.subscribeOnState(this.handleDocumentTreeStateChange);
+     };
+
+    NavigationController.prototype.deactivate = function () {
+        console.log('Deactivate navigation');
+        this.documentTreeStateSubscription.dispose();
     };
 
 })();

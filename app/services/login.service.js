@@ -9,7 +9,7 @@
         /* jshint validthis:true */
         var self = this;
 
-        self.loginSubject = new Rx.ReplaySubject();
+        self.loginSubject = new Rx.Subject();
 
         self.service = {
             login: login,

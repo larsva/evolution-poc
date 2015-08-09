@@ -34,7 +34,7 @@
                 } , as: 'user-profile'
             },
             {
-                path: '/document/:id',
+                path: '/document',
                 components: {
                     'header': 'header',
                     'navigation': 'navigation',
