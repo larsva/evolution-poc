@@ -1,11 +1,14 @@
 [
   {
-    "name": "Mapp 1",
+    "name": "Viktiga document",
     "id": "1",
     "type": "folder",
     "children": [
       {
-        "name": "File 11",
+        "name": "Dokument 2",
+        "documentId": "KS 2015/23",
+        "contact": "Nathan Fillion",
+        "created": "2015-03-12",
         "id": "11",
         "type": "file",
         "children": []
@@ -13,13 +16,16 @@
     ]
   },
   {
-    "name": "Mapp 2",
+    "name": "Mindre viktiga document",
     "id": "2",
     "type": "folder",
     "children": []
   },
   {
-    "name": "File 1",
+    "name": "Dokument 3",
+    "documentId": "KS 2015/47",
+    "contact": "Nathan Fillion",
+    "date": "2015-05-28",
     "id": "3",
     "type": "file",
     "children": []
