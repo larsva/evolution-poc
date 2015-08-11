@@ -17,6 +17,16 @@
         self.selectedNode = null;
         self.documentTreeActivated = false;
 
+        self.nodifyDocuments = function (documents, parentNode) {
+            angular.forEach(documents, function (key, value) {
+                var document = key;
+                document.parent = parentNode;
+                if (document.children.length > 0) {
+                    self.nodifyDocuments(document.children, document);
+                }
+            });
+        };
+
         return {
             setSelectedNode: setSelectedNode,
             getSelectedNode: getSelectedNode,
@@ -24,7 +34,8 @@
             subscribeOnState: subscribeOnState,
             activateDocumentTree: activateDocumentTree,
             deactivateDocumentTree: deactivateDocumentTree,
-            isDocumentTreeActivated: isDocumentTreeActivated
+            isDocumentTreeActivated: isDocumentTreeActivated,
+            nodify: nodify
         };
 
         //noinspection JSUnusedLocalSymbols
@@ -61,6 +72,11 @@
         function isDocumentTreeActivated() {
             return self.documentTreeActivated;
         }
+
+        function nodify(documents) {
+            self.nodifyDocuments(documents, null);
+            return documents;
+        };
 
       }
 

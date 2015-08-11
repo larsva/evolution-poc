@@ -43,7 +43,7 @@
 
 
         var documentTreeData = Document.getDocuments().query(function () {
-            self.documentTreeData = documentTreeData;
+            self.documentTreeData = DocumentTree.nodify(documentTreeData);
         });
 
         self.handleDocumentTreeStateChange = function (state) {

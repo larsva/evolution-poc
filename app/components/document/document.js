@@ -1,6 +1,6 @@
 (function () {
     angular.module('app.document', [])
-           .controller('DocumentController', ['Document', 'DocumentTree', 'AuthMixin', DocumentController]);
+        .controller('DocumentController', ['Document', 'DocumentTree', 'AuthMixin', DocumentController]);
 
     function DocumentController(Document, DocumentTree, AuthMixin) {
         var self = this;
@@ -14,17 +14,17 @@
             self.selectedNode = selectedNode;
         };
 
-        self.showRootNode = function() {
+        self.showRootNode = function () {
             var documents = Document.getDocuments().query(function () {
-                self.handleSelectedNode({name: "root", "id": -1, "children": documents});
+                self.handleSelectedNode({name: "root", "id": -1, "children": DocumentTree.nodify(documents)});
             });
         };
 
-        self.openNode = function(node) {
+        self.openNode = function (node) {
             self.handleSelectedNode(node);
         };
 
-        self.getNodesToRender = function() {
+        self.getNodesToRender = function () {
             if (self.selectedNode) {
                 return self.selectedNode.children.length > 0 ? self.selectedNode.children : [self.selectedNode];
 
