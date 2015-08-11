@@ -1,7 +1,7 @@
 ﻿<a href="#"><img src="images/icon-nav-arrow-dark.svg" class="nav-arrow" alt="Minimera menyn"/></a>
 <nav class="navigation">
     <ul>
-        <li> <a ng-link="document" class="tree-link"><img src="images/icon-nav-arrow-white.svg" class="nav-arrow-icon" /> </a><img src="images/icon-folder-white.svg" alt="Mappar och Dokument" width="22" height="16" class="nav-icon" /><a ng-link="document" >Mappar och Dokument</a></li>
+        <li> <a ng-link="document" ng-click="navigation.toggleShowDocumentTree()" class="tree-link"><img src="images/icon-nav-arrow-white.svg" ng-class="{'nav-arrow-icon': !navigation.documentTreeActivated}" /> </a><img src="images/icon-folder-white.svg" alt="Mappar och Dokument" width="22" height="16" class="nav-icon" /><a ng-link="document" >Mappar och Dokument</a></li>
         <li>
             <div class="treecontrol-container" ng-show="navigation.documentTreeActivated">
                 <treecontrol class="tree-light" tree-model="navigation.documentTreeData" on-selection="navigation.handleDocumentSelection(node)">

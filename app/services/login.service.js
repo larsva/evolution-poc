@@ -3,9 +3,9 @@
 
     angular
         .module('app')
-        .factory('Login', ['$q', '$modal', 'AUTH', LoginService]);
+        .factory('Login', ['$log','$q', '$modal', 'AUTH', LoginService]);
 
-    function LoginService($q, $modal, AUTH) {
+    function LoginService($log,$q, $modal, AUTH) {
         /* jshint validthis:true */
         var self = this;
 
@@ -32,7 +32,7 @@
         self.showLoginDialog = function (modalDeferred) {
             self.loginDialog.$promise.then(function () {
                 self.doShowLoginDialog().then(function (res) {
-                        console.log('Logged in: ' + res);
+                        $log.info('Logged in: ' + res);
                         if (res == AUTH.AUTHENTICATED) {
                             modalDeferred.resolve();
                             self.doHideLoginDialog();
@@ -41,7 +41,7 @@
                         }
                     },
                     function (res) {
-                        console.log('Rejected: ' + res);
+                        $log.info('Rejected: ' + res);
                     })
             });
         };
@@ -65,7 +65,7 @@
         }
 
         function handleLoginResult(res) {
-            console.log('Login result: ' + res);
+            $log.info('Login result: ' + res);
             self.deferred.resolve(res);
         }
 

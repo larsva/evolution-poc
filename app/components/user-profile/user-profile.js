@@ -3,9 +3,9 @@
 
     angular
         .module('app.user.profile', [])
-        .controller('UserProfileController', ['Auth', 'User', 'AuthMixin', UserProfileController]);
+        .controller('UserProfileController', ['$log','Auth', 'User', 'AuthMixin', UserProfileController]);
 
-    function UserProfileController(Auth, User, AuthMixin) {
+    function UserProfileController($log,Auth, User, AuthMixin) {
         /* jshint validthis:true */
         var self = this;
 
@@ -21,14 +21,14 @@
                 console.log('UserProfile - current user: ' + user.userId);
                 var profileData = User.getUser(user.userId,
                             function () {
-                                console.log('Read profile data for ' + profileData.userId);
+                                $log.debug('Read profile data for ' + profileData.userId);
                                 self.data = profileData;
                             },
                             function() {
-                                console.log('Unable to read profile data for ' + user.userId);
+                                $log.error('Unable to read profile data for ' + user.userId);
                             });
                 } else {
-                console.log('UserProfile - current user undefined.');
+                $log.warn('UserProfile - current user undefined.');
             }
         };
 

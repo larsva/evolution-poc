@@ -3,12 +3,13 @@
 
     angular
         .module('app.navigation', [])
-        .controller('NavigationController', ['Auth', 'ChangeUnit', 'Document', 'DocumentTree','DOCUMENT_TREE','AuthMixin', NavigationController]);
+        .controller('NavigationController', ['$log','Auth', 'ChangeUnit', 'Document', 'DocumentTree','DOCUMENT_TREE','AuthMixin', NavigationController]);
 
 
-    function NavigationController(Auth, ChangeUnit, Document, DocumentTree,DOCUMENT_TREE,AuthMixin) {
+    function NavigationController($log,Auth, ChangeUnit, Document, DocumentTree,DOCUMENT_TREE,AuthMixin) {
         /* jshint validthis:true */
         var self = this;
+        self.logger = $log;
         self.document = Document;
         self.authMixin = AuthMixin;
         self.documenTree = DocumentTree;
@@ -32,6 +33,14 @@
             self.changeUnitMode = false;
         };
 
+        self.toggleShowDocumentTree = function() {
+           if (self.documentTreeActivated) {
+              DocumentTree.deactivateDocumentTree();
+           } else {
+               DocumentTree.activateDocumentTree();
+           }
+        };
+
 
         var documentTreeData = Document.getDocuments().query(function () {
             self.documentTreeData = documentTreeData;
@@ -48,13 +57,13 @@
     }
 
     NavigationController.prototype.activate = function ($scope) {
-        console.log('Activate navigation');
+        this.logger.debug('Activate navigation');
         $scope.options = this.document.getDocumentTreeOptions();
         this.documentTreeStateSubscription = this.documenTree.subscribeOnState(this.handleDocumentTreeStateChange);
      };
 
     NavigationController.prototype.deactivate = function () {
-        console.log('Deactivate navigation');
+        this.logger.debug('Deactivate navigation');
         this.documentTreeStateSubscription.dispose();
     };
 

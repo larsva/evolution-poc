@@ -8,9 +8,9 @@
                 html: true
             });
         })
-        .controller('App', ['$location','$modal','$router','Auth','AUTH','Login',AppController]);
+        .controller('App', ['$log','$location','$modal','$router','Auth','AUTH','Login',AppController]);
 
-    function AppController($location,$modal,$router, Auth,AUTH,Login) {
+    function AppController($log,$location,$modal,$router, Auth,AUTH,Login) {
         var self = this;
 
         self.hideContent = false;
@@ -46,7 +46,7 @@
 
         Auth.subscribe(function(user) {
             self.currentUser = user;
-            console.log('AppController - new current user:' + (self.currentUser != null ? self.currentUser.userId : 'null'));
+            $log.info('AppController - new current user:' + (self.currentUser != null ? self.currentUser.userId : 'null'));
         });
 
         Login.subscribe(function(state) {

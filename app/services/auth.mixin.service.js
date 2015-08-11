@@ -10,9 +10,9 @@
 
     angular
         .module('app')
-        .service('AuthMixin', ['$location','Auth','Login',AuthMixinService]);
+        .service('AuthMixin', ['$log','$location','Auth','Login',AuthMixinService]);
 
-    function AuthMixinService($location,Auth,Login) {
+    function AuthMixinService($log,$location,Auth,Login) {
         /* jshint validthis:true */
         var self = this;
 
@@ -24,12 +24,12 @@
         return self.service;
 
         function canActivate() {
-            console.log('Can activate route change to: ' + $location.path() + '?');
+            $log.debug('Can activate route change to: ' + $location.path() + '?');
             var authenticated = Auth.isAuthenticated();
             if (!authenticated) {
                  return Login.login();
             }
-            console.log('Activate route change to: ' + $location.path());
+            $log.debug('Activate route change to: ' + $location.path());
             return true;
         };
 

@@ -6,10 +6,10 @@
         .constant('DOCUMENT_TREE',{
             ACTIVATED: 'activated',
             DEACTIVATED: 'deactivated'
-        })
-        .factory('DocumentTree', ['Document', 'DOCUMENT_TREE',DocumentTreeControllerService]);
+            })
+         .factory('DocumentTree', ['$log','DOCUMENT_TREE',DocumentTreeControllerService]);
 
-    function DocumentTreeControllerService(Document,DOCUMENT_TREE) {
+    function DocumentTreeControllerService($log,DOCUMENT_TREE) {
         var self = this;
 
         self.selectedDocumentSubject = new Rx.Subject();
@@ -25,12 +25,11 @@
             activateDocumentTree: activateDocumentTree,
             deactivateDocumentTree: deactivateDocumentTree,
             isDocumentTreeActivated: isDocumentTreeActivated
-
         };
 
         //noinspection JSUnusedLocalSymbols
         function setSelectedNode(node) {
-            console.log('Selected node: [' + node ? (+ node.name + ',' + node.id): 'null' + ']');
+            $log.debug('Selected node: [' + node ? (+ node.name + ',' + node.id): 'null' + ']');
             self.selectedNode = node;
             self.selectedDocumentSubject.onNext(self.selectedNode);
         };
@@ -48,13 +47,13 @@
         };
 
         function activateDocumentTree() {
-            console.log("Activate document tree");
+            $log.debug("Activate document tree");
             self.documentTreeActivated = true;
             self.documentTreeStateSubject.onNext(DOCUMENT_TREE.ACTIVATED)
         };
 
         function deactivateDocumentTree() {
-            console.log("Deactivate document tree");
+            $log.debug("Deactivate document tree");
             self.documentTreeActivated = false;
             self.documentTreeStateSubject.onNext(DOCUMENT_TREE.DEACTIVATED)
         };
@@ -62,6 +61,7 @@
         function isDocumentTreeActivated() {
             return self.documentTreeActivated;
         }
-    }
+
+      }
 
 })();

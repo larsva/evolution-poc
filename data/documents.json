@@ -1,16 +1,41 @@
 [
   {
-    "name": "Viktiga document",
+    "name": "Viktiga dokument",
     "id": "1",
     "type": "folder",
     "children": [
+      {
+        "name": "Superviktiga document",
+        "id": "3",
+        "type": "folder",
+        "children": [
+          {
+            "name": "Dokument 4",
+            "documentId": "KS 2015/33",
+            "contact": "Nathan Fillion",
+            "created": "2015-03-01",
+            "id": "31",
+            "type": "text-document",
+            "children": []
+          },
+          {
+            "name": "Dokument 5",
+            "documentId": "KS 2015/99",
+            "contact": "Nathan Fillion",
+            "created": "2015-08-01",
+            "id": "32",
+            "type": "text-document",
+            "children": []
+          }
+       ]
+      },
       {
         "name": "Dokument 2",
         "documentId": "KS 2015/23",
         "contact": "Nathan Fillion",
         "created": "2015-03-12",
         "id": "11",
-        "type": "file",
+        "type": "text-document",
         "children": []
       }
     ]
@@ -25,9 +50,9 @@
     "name": "Dokument 3",
     "documentId": "KS 2015/47",
     "contact": "Nathan Fillion",
-    "date": "2015-05-28",
+    "created": "2015-05-28",
     "id": "3",
-    "type": "file",
+    "type": "text-document",
     "children": []
   }
 ]

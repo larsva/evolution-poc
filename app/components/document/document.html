@@ -3,46 +3,44 @@
     </div>
     <div class="alignleft">
     </div>
-</div><!-- end list-meta-bar -->
+</div>
 <div id="page-content">
     <div class="table">
         <div class="tablerowgroup">
               <div class="tablerow listheader">
                 <div class="tablecell cellmain sortedby">
                     Namn <img src="images/icon-arrow-black.svg" width="10" alt="Sorterad på" />
-                </div><!-- tablecell -->
+                </div>
                 <div class="tablecell">
                     DokumentID
-                </div><!-- tablecell -->
+                </div>
                 <div class="tablecell">
                     Kontaktnamn
-                </div><!-- tablecell -->
+                </div>
                 <div class="tablecell">
                     Skapad
-                </div><!-- tablecell -->
-            </div><!-- tablerow -->
-        </div><!-- tablerowgroup -->
+                </div>
+            </div>
+        </div>
 
-
-
-        <div class="tablerowgroup" data-ng-repeat='child in document.selectedNode.children'>
+        <div class="tablerowgroup" data-ng-repeat='child in document.getNodesToRender()'>
             <div class="tablerow">
                 <div class="tablecell cellmain cfslarge">
-                    <img src="images/icon-document-text.svg" class="icon-folder" alt="Mapp" />{{child.name}}
-                </div><!-- tablecell -->
+                    <render-document-icon data-document-type="{{child.type}}"></render-document-icon><a ng-dblclick="document.openNode(child);$event.preventDefault()" >{{child.name}}</a>
+                </div>
                 <div class="tablecell">
                     {{child.documentId}}
-                </div><!-- tablecell -->
+                </div>
                 <div class="tablecell">
                     {{child.contact}}
-                </div><!-- tablecell -->
+                </div>
                 <div class="tablecell">
                     {{child.created}}
-                </div><!-- tablecell -->
-            </div><!-- tablerow -->
-        </div><!-- tablerowgroup -->
+                </div>
+            </div>
+        </div>
 
 
-    </div><!-- table -->
+    </div>
 
-</div><!-- end #page-content -->
+</div>

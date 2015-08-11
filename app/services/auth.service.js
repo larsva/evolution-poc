@@ -10,9 +10,9 @@
             LOGIN_STARTED: 'login_started',
             LOGIN_FINISHED: 'login_finished'
         })
-        .factory('Auth', ['User', AuthService]);
+        .factory('Auth', ['$log','User', AuthService]);
 
-    function AuthService(User) {
+    function AuthService($log,User) {
         var self = this;
 
 
@@ -59,7 +59,7 @@
         }
 
         function setCurrentUser(user) {
-            console.log('Auth - new current user: ' + user.userId);
+            $log.info('Auth - new current user: ' + user.userId);
             self.currentUser = user;
             angular.extend(self.currentUser, {
                 name: function () {
