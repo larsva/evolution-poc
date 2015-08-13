@@ -16,7 +16,9 @@
 
         self.showRootNode = function () {
             var documents = Document.getDocuments().query(function () {
-                self.handleSelectedNode({name: "root", "id": -1, "children": DocumentTree.nodify(documents)});
+                var root = {name: "Mappar och dokument", "id": -1, "parent": null,"children": []};
+                root.children = DocumentTree.nodifyDocuments(documents);
+                DocumentTree.setSelectedNode(root);
             });
         };
 
