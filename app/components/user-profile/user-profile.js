@@ -34,8 +34,7 @@
 
 
         self.activate = function() {
-            AuthMixin.activate();
-            self.getUserProfile();
+              self.getUserProfile();
         };
 
         self.startEditPersonalInfo = function () {
